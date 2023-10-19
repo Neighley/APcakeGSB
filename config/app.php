@@ -296,11 +296,6 @@ return [
             'className' => Connection::class,
             'driver' => Mysql::class,
             'persistent' => false,
-            'host' => 'localhost',
-            'username' => 'ju',
-            'password' => 'juju',
-            'database' => 'APcakeGSB',
-            'encoding' => 'utf8',
             'timezone' => 'UTC',
 
             /*
