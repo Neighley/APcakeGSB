@@ -3,10 +3,13 @@
  * @var \App\View\AppView $this
  * @var iterable<\App\Model\Entity\Fichefrai> $fichefrais
  */
+
+$identity = $this->getRequest()->getAttribute('identity');
+
 ?>
 <div class="fichefrais index content">
-    <?= $this->Html->link(__('New Fichefrai'), ['action' => 'add'], ['class' => 'button float-right']) ?>
-    <h3><?= __('Fichefrais Liste') ?></h3>
+    <?= $this->Html->link(__('Nouveau +'), ['action' => 'add'], ['class' => 'button float-right']) ?>
+    <h3><?= __('Fiche de frais Utilisateur de '); ?><b><?php echo $identity["username"]; ?></b></h3>
     <div class="table-responsive">
         <table>
             <thead>

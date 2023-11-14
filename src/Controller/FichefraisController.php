@@ -28,11 +28,12 @@ class FichefraisController extends AppController
 
     public function list()
     {
-        $this->paginate = [
-            'contain' => ['Users'],
-        ];
-        $fichefrais = $this->paginate($this->Fichefrais);
+        $identity = $this->getRequest()->getAttribute('identity');
+        $identity = $identity ?? [];
+        $iduser = $identity["id"];
 
+        $fichefrais_req = $this->Fichefrais->find('all', ['conditions'=>['FicheFrais.user_id'=>$iduser]]);
+        $fichefrais = $this->paginate($fichefrais_req);
         $this->set(compact('fichefrais'));
     }
 
@@ -48,7 +49,6 @@ class FichefraisController extends AppController
         $fichefrai = $this->Fichefrais->get($id, [
             'contain' => ['Users', 'Lignefraisforfait', 'Lignefraishf'],
         ]);
-
         $this->set(compact('fichefrai'));
     }
 
