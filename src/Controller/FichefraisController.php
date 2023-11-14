@@ -26,6 +26,16 @@ class FichefraisController extends AppController
         $this->set(compact('fichefrais'));
     }
 
+    public function list()
+    {
+        $this->paginate = [
+            'contain' => ['Users'],
+        ];
+        $fichefrais = $this->paginate($this->Fichefrais);
+
+        $this->set(compact('fichefrais'));
+    }
+
     /**
      * View method
      *

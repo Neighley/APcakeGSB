@@ -41,8 +41,10 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
             <a href="<?= $this->Url->build('/') ?>"><span>Cake</span>PHP</a>
         </div>
         <div class="top-nav-links">
-            <a target="_blank" rel="noopener" href="https://book.cakephp.org/4/">Documentation</a>
-            <a target="_blank" rel="noopener" href="https://api.cakephp.org/">API</a>
+            <a target="_self" rel="noopener" href="http://localhost:8765">Accueil</a>
+            <a target="_self" rel="noopener" href="http://localhost:8765/fichefrais">Fiche Frais</a>
+            <a target="_self" rel="noopener" href="http://localhost:8765">Frais Forfait</a>
+            <a target="_self" rel="noopener" href="http://localhost:8765/logout">Se déconnecter</a>
         </div>
     </nav>
     <main class="main">
