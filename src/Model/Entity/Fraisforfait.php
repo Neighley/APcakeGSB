@@ -10,6 +10,7 @@ use Cake\ORM\Entity;
  *
  * @property int $id
  * @property int $montant
+ * @property string $label
  *
  * @property \App\Model\Entity\Lignefraisforfait $lignefraisforfait
  */
@@ -26,6 +27,7 @@ class Fraisforfait extends Entity
      */
     protected $_accessible = [
         'montant' => true,
+        'label' => true,
         'lignefraisforfait' => true,
     ];
 }

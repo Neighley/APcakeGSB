@@ -19,6 +19,10 @@
             <h3><?= h($fraisforfait->id) ?></h3>
             <table>
                 <tr>
+                    <th><?= __('Label') ?></th>
+                    <td><?= h($fraisforfait->label) ?></td>
+                </tr>
+                <tr>
                     <th><?= __('Lignefraisforfait') ?></th>
                     <td><?= $fraisforfait->has('lignefraisforfait') ? $this->Html->link($fraisforfait->lignefraisforfait->label, ['controller' => 'Lignefraisforfait', 'action' => 'view', $fraisforfait->lignefraisforfait->id]) : '' ?></td>
                 </tr>

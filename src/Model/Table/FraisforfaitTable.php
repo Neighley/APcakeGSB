@@ -60,6 +60,12 @@ class FraisforfaitTable extends Table
             ->requirePresence('montant', 'create')
             ->notEmptyString('montant');
 
+        $validator
+            ->scalar('label')
+            ->maxLength('label', 200)
+            ->requirePresence('label', 'create')
+            ->notEmptyString('label');
+
         return $validator;
     }
 }

@@ -13,6 +13,7 @@
                 <tr>
                     <th><?= $this->Paginator->sort('id') ?></th>
                     <th><?= $this->Paginator->sort('montant') ?></th>
+                    <th><?= $this->Paginator->sort('label') ?></th>
                     <th class="actions"><?= __('Actions') ?></th>
                 </tr>
             </thead>
@@ -21,6 +22,7 @@
                 <tr>
                     <td><?= $this->Number->format($fraisforfait->id) ?></td>
                     <td><?= $this->Number->format($fraisforfait->montant) ?></td>
+                    <td><?= h($fraisforfait->label) ?></td>
                     <td class="actions">
                         <?= $this->Html->link(__('View'), ['action' => 'view', $fraisforfait->id]) ?>
                         <?= $this->Html->link(__('Edit'), ['action' => 'edit', $fraisforfait->id]) ?>

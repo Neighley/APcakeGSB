@@ -18,13 +18,13 @@
         <div class="fichefrais form content">
             <?= $this->Form->create($fichefrai) ?>
             <fieldset>
-                <legend><?= __('Add Fichefrai') ?></legend>
+                <legend><?= __('Créer une nouvelle fiche de frais') ?></legend>
                 <?php
                     echo $this->Form->control('annee');
                     echo $this->Form->control('mois');
                     echo $this->Form->control('montantvalide');
                     echo $this->Form->control('user_id', ['options' => $users]);
-                    echo $this->Form->control('etat_id');
+                    echo $this->Form->control('etat_id', ['options' => $etats]);
                     echo $this->Form->control('lignefraisforfait._ids', ['options' => $lignefraisforfait]);
                     echo $this->Form->control('lignefraishf._ids', ['options' => $lignefraishf]);
                 ?>

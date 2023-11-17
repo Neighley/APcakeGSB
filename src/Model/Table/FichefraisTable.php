@@ -50,6 +50,11 @@ class FichefraisTable extends Table
             'foreignKey' => 'user_id',
             'joinType' => 'INNER',
         ]);
+        $this->belongsTo('Etats', [
+            'className'=>'Etat',
+            'foreignKey' => 'etat_id',
+            'joinType' => 'INNER',
+        ]);
         $this->belongsToMany('Lignefraisforfait', [
             'foreignKey' => 'fichefrai_id',
             'targetForeignKey' => 'lignefraisforfait_id',

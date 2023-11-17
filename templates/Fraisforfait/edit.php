@@ -23,6 +23,7 @@
                 <legend><?= __('Edit Fraisforfait') ?></legend>
                 <?php
                     echo $this->Form->control('montant');
+                    echo $this->Form->control('label');
                 ?>
             </fieldset>
             <?= $this->Form->button(__('Submit')) ?>

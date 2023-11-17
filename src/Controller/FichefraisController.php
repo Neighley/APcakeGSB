@@ -70,9 +70,12 @@ class FichefraisController extends AppController
             $this->Flash->error(__('The fichefrai could not be saved. Please, try again.'));
         }
         $users = $this->Fichefrais->Users->find('list', ['limit' => 200])->all();
+        $etats =  $this->Fichefrais->Etats->find('list', ['limit' => 200])->all();
+      
+       
         $lignefraisforfait = $this->Fichefrais->Lignefraisforfait->find('list', ['limit' => 200])->all();
         $lignefraishf = $this->Fichefrais->Lignefraishf->find('list', ['limit' => 200])->all();
-        $this->set(compact('fichefrai', 'users', 'lignefraisforfait', 'lignefraishf'));
+        $this->set(compact('fichefrai', 'users','etats', 'lignefraisforfait', 'lignefraishf'));
     }
 
     /**

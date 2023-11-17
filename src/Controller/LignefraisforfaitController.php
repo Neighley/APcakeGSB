@@ -56,8 +56,10 @@ class LignefraisforfaitController extends AppController
             }
             $this->Flash->error(__('The lignefraisforfait could not be saved. Please, try again.'));
         }
+        
+        //$fichefrais2 = $this->Lignefraisforfait->Fraisforfait->find('list', ['limit' => 200])->all();
         $fichefrais = $this->Lignefraisforfait->Fichefrais->find('list', ['limit' => 200])->all();
-        $this->set(compact('lignefraisforfait', 'fichefrais'));
+        $this->set(compact('lignefraisforfait', 'fichefrais', 'fraisforfait'));
     }
 
     /**

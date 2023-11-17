@@ -27,6 +27,7 @@ class FraisforfaitFixture extends TestFixture
             [
                 'id' => 1,
                 'montant' => 1,
+                'label' => 'Lorem ipsum dolor sit amet',
             ],
         ];
         parent::init();

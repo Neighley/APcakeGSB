@@ -40,7 +40,7 @@ class EtatTable extends Table
         parent::initialize($config);
 
         $this->setTable('etat');
-        $this->setDisplayField('id');
+        $this->setDisplayField('etat');
         $this->setPrimaryKey('id');
         $this->hasOne('Fichefrais', [
             'foreignKey' => 'etat_id',
