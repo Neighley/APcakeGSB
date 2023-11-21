@@ -42,7 +42,7 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
         </div>
         <div class="top-nav-links">
             <a target="_self" rel="noopener" href="http://localhost:8765">Accueil</a>
-            <a target="_self" rel="noopener" href="http://localhost:8765/fichefrais">Fiche Frais</a>
+            <a target="_self" rel="noopener" href="http://localhost:8765/fichefrais/list">Fiche Frais</a>
             <a target="_self" rel="noopener" href="http://localhost:8765">Frais Forfait</a>
             <a target="_self" rel="noopener" href="http://localhost:8765/logout">Se déconnecter</a>
         </div>

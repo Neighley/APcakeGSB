@@ -105,6 +105,27 @@ class FichefraisController extends AppController
         $this->set(compact('fichefrai', 'users', 'lignefraisforfait', 'lignefraishf'));
     }
 
+    // CC de la fonction edit pour la page fichefrais/display
+    public function display($id = null)
+    {
+        $fichefrai = $this->Fichefrais->get($id, [
+            'contain' => ['Lignefraisforfait', 'Lignefraishf'],
+        ]);
+        if ($this->request->is(['patch', 'post', 'put'])) {
+            $fichefrai = $this->Fichefrais->patchEntity($fichefrai, $this->request->getData());
+            if ($this->Fichefrais->save($fichefrai)) {
+                $this->Flash->success(__('The fichefrai has been saved.'));
+
+                return $this->redirect(['action' => 'index']);
+            }
+            $this->Flash->error(__('The fichefrai could not be saved. Please, try again.'));
+        }
+        $users = $this->Fichefrais->Users->find('list', ['limit' => 200])->all();
+        $lignefraisforfait = $this->Fichefrais->Lignefraisforfait->find('list', ['limit' => 200])->all();
+        $lignefraishf = $this->Fichefrais->Lignefraishf->find('list', ['limit' => 200])->all();
+        $this->set(compact('fichefrai', 'users', 'lignefraisforfait', 'lignefraishf'));
+    }
+
     /**
      * Delete method
      *

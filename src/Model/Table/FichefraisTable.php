@@ -56,12 +56,12 @@ class FichefraisTable extends Table
             'joinType' => 'INNER',
         ]);
         $this->belongsToMany('Lignefraisforfait', [
-            'foreignKey' => 'fichefrai_id',
+            'foreignKey' => 'fichefrais_id',
             'targetForeignKey' => 'lignefraisforfait_id',
             'joinTable' => 'fichefrais_lignefraisforfait',
         ]);
         $this->belongsToMany('Lignefraishf', [
-            'foreignKey' => 'fichefrai_id',
+            'foreignKey' => 'fichefrais_id',
             'targetForeignKey' => 'lignefraishf_id',
             'joinTable' => 'fichefrais_lignefraishf',
         ]);

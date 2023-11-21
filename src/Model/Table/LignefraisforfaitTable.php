@@ -45,7 +45,7 @@ class LignefraisforfaitTable extends Table
 
         $this->belongsToMany('Fichefrais', [
             'foreignKey' => 'lignefraisforfait_id',
-            'targetForeignKey' => 'fichefrai_id',
+            'targetForeignKey' => 'fichefrais_id',
             'joinTable' => 'fichefrais_lignefraisforfait',
         ]);
     }
