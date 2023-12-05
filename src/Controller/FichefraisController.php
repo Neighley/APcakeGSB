@@ -109,7 +109,7 @@ class FichefraisController extends AppController
     public function display($id = null)
     {
         $fichefrai = $this->Fichefrais->get($id, [
-            'contain' => ['Lignefraisforfait', 'Lignefraishf'],
+            'contain' => ['Lignefraisforfait', 'Lignefraishf','Lignefraisforfait.Fraisforfait'],
         ]);
         if ($this->request->is(['patch', 'post', 'put'])) {
             $fichefrai = $this->Fichefrais->patchEntity($fichefrai, $this->request->getData());

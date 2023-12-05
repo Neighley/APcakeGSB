@@ -31,10 +31,11 @@ $identity = $this->getRequest()->getAttribute('identity');
                     <td><?= $this->Number->format($fichefrai->mois) ?></td>
                     <td><?= $this->Number->format($fichefrai->montantvalide) ?></td>
                     <td><?= $fichefrai->has('user') ? $this->Html->link($fichefrai->user->id, ['controller' => 'Users', 'action' => 'view', $fichefrai->user->id]) : '' ?></td>
-                    <td><?= $this->Number->format($fichefrai->etat_id) ?></td>
+                    <td><?= $fichefrai->has('etat') ? $this->Html->link($fichefrai->etat,['controller'=> 'Etats','actions'=> 'view',$fichefrai->etat]) : '' ?></td>
                     <td class="actions">
                         <?= $this->Html->link(__('View'), ['action' => 'view', $fichefrai->id]) ?>
-                        <?= $this->Html->link(__('Edit'), ['action' => 'edit', $fichefrai->id]) ?>
+                        <?php // CE QUE JAI CHANGE ATTENTION ?>
+                        <?= $this->Html->link(__('Display'), ['action' => 'display', $fichefrai->id]) ?>
                         <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $fichefrai->id], ['confirm' => __('Are you sure you want to delete # {0}?', $fichefrai->id)]) ?>
                     </td>
                 </tr>

@@ -48,6 +48,11 @@ class LignefraisforfaitTable extends Table
             'targetForeignKey' => 'fichefrais_id',
             'joinTable' => 'fichefrais_lignefraisforfait',
         ]);
+
+        $this->belongsTo('Fraisforfait', [
+            'foreignkey' => 'fraisforfait_id',
+            'joinType' => 'INNER'
+        ]);
     }
 
     /**
