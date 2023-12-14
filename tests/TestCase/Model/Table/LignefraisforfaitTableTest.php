@@ -26,6 +26,7 @@ class LignefraisforfaitTableTest extends TestCase
     protected $fixtures = [
         'app.Lignefraisforfait',
         'app.Fichefrais',
+        'app.Fraisforfait',
     ];
 
     /**

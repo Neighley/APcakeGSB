@@ -11,6 +11,7 @@ use Cake\Validation\Validator;
 /**
  * Lignefraisforfait Model
  *
+ * @property \App\Model\Table\FraisforfaitTable&\Cake\ORM\Association\BelongsTo $Fraisforfait
  * @property \App\Model\Table\FichefraisTable&\Cake\ORM\Association\BelongsToMany $Fichefrais
  *
  * @method \App\Model\Entity\Lignefraisforfait newEmptyEntity()
@@ -43,15 +44,14 @@ class LignefraisforfaitTable extends Table
         $this->setDisplayField('label');
         $this->setPrimaryKey('id');
 
+        $this->belongsTo('Fraisforfait', [
+            'foreignKey' => 'fraisforfait_id',
+            'joinType' => 'INNER',
+        ]);
         $this->belongsToMany('Fichefrais', [
             'foreignKey' => 'lignefraisforfait_id',
             'targetForeignKey' => 'fichefrais_id',
             'joinTable' => 'fichefrais_lignefraisforfait',
-        ]);
-
-        $this->belongsTo('Fraisforfait', [
-            'foreignkey' => 'fraisforfait_id',
-            'joinType' => 'INNER'
         ]);
     }
 
@@ -64,18 +64,12 @@ class LignefraisforfaitTable extends Table
     public function validationDefault(Validator $validator): Validator
     {
         $validator
-            ->integer('label')
-            ->requirePresence('label', 'create')
-            ->notEmptyString('label');
-
-        $validator
             ->integer('quantite')
             ->requirePresence('quantite', 'create')
             ->notEmptyString('quantite');
 
         $validator
             ->integer('fraisforfait_id')
-            ->requirePresence('fraisforfait_id', 'create')
             ->notEmptyString('fraisforfait_id')
             ->add('fraisforfait_id', 'unique', ['rule' => 'validateUnique', 'provider' => 'table']);
 
@@ -91,7 +85,7 @@ class LignefraisforfaitTable extends Table
      */
     public function buildRules(RulesChecker $rules): RulesChecker
     {
-        $rules->add($rules->isUnique(['fraisforfait_id']), ['errorField' => 'fraisforfait_id']);
+        $rules->add($rules->existsIn('fraisforfait_id', 'Fraisforfait'), ['errorField' => 'fraisforfait_id']);
 
         return $rules;
     }

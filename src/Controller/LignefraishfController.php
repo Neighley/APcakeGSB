@@ -85,6 +85,24 @@ class LignefraishfController extends AppController
         $this->set(compact('lignefraishf', 'fichefrais'));
     }
 
+    public function modify($id = null)
+    {
+        $lignefraishf = $this->Lignefraishf->get($id, [
+            'contain' => ['Fichefrais'],
+        ]);
+        if ($this->request->is(['patch', 'post', 'put'])) {
+            $lignefraishf = $this->Lignefraishf->patchEntity($lignefraishf, $this->request->getData());
+            if ($this->Lignefraishf->save($lignefraishf)) {
+                $this->Flash->success(__('The lignefraishf has been saved.'));
+
+                return $this->redirect(['action' => 'index']);
+            }
+            $this->Flash->error(__('The lignefraishf could not be saved. Please, try again.'));
+        }
+        $fichefrais = $this->Lignefraishf->Fichefrais->find('list', ['limit' => 200])->all();
+        $this->set(compact('lignefraishf', 'fichefrais'));
+    }
+
     /**
      * Delete method
      *

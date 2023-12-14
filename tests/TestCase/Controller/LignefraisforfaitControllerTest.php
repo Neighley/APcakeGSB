@@ -24,6 +24,7 @@ class LignefraisforfaitControllerTest extends TestCase
     protected $fixtures = [
         'app.Lignefraisforfait',
         'app.Fichefrais',
+        'app.Fraisforfait',
         'app.FichefraisLignefraisforfait',
     ];
 

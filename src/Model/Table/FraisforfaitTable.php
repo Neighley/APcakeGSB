@@ -40,7 +40,7 @@ class FraisforfaitTable extends Table
         parent::initialize($config);
 
         $this->setTable('fraisforfait');
-        $this->setDisplayField('id');
+        $this->setDisplayField('label');
         $this->setPrimaryKey('id');
         $this->hasOne('Lignefraisforfait', [
             'foreignKey' => 'fraisforfait_id',

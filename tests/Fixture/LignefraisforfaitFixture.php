@@ -26,7 +26,6 @@ class LignefraisforfaitFixture extends TestFixture
         $this->records = [
             [
                 'id' => 1,
-                'label' => 1,
                 'quantite' => 1,
                 'fraisforfait_id' => 1,
             ],

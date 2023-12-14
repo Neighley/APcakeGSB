@@ -25,8 +25,8 @@
                 <legend><?= __('Edit Lignefraisforfait') ?></legend>
                 <?php
                     echo $this->Form->control('quantite');
-                    echo $this->Form->control('fraisforfait_id', ['options' => $fraisforfait]);
-                    echo $this->Form->control('fichefrais._ids', ['options' => $fichefrais]);
+                    //echo $this->Form->control('fraisforfait_id', ['options' => $fraisforfait]);
+                    //echo $this->Form->control('fichefrais._ids', ['options' => $fichefrais]);
                 ?>
             </fieldset>
             <?= $this->Form->button(__('Submit')) ?>

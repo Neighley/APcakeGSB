@@ -21,7 +21,7 @@
                 <?php foreach ($lignefraishf as $lignefraishf): ?>
                 <tr>
                     <td><?= $this->Number->format($lignefraishf->id) ?></td>
-                    <td><?= $this->Number->format($lignefraishf->montant) ?></td>
+                    <td><?= $this->Number->format($lignefraishf->montant) ?>€</td>
                     <td><?= h($lignefraishf->label) ?></td>
                     <td class="actions">
                         <?= $this->Html->link(__('View'), ['action' => 'view', $lignefraishf->id]) ?>

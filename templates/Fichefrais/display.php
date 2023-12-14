@@ -33,6 +33,8 @@
 
                 <legend><?= __('Editer Lignes frais forfait') ?></legend>
 
+                <button>Ajouter une ligne</button>
+
                 <table>
                     <thead>
                         <tr>
@@ -51,8 +53,7 @@
                                 <td><?= ($lignefraisforfait->fraisforfait->montant) ?></td>
                                 <td><?= $this->Number->format($lignefraisforfait->quantite) ?></td>
                                 <td class="actions">
-                                    <?= $this->Html->link(__('View'), ['action' => 'view', $lignefraisforfait->id]) ?>
-                                    <?= $this->Html->link(__('Edit'), ['action' => 'edit', $lignefraisforfait->id]) ?>
+                                    <a href = "http://localhost:8765/lignefraisforfait/modify/<?php echo $lignefraisforfait->id ?>">Modify</a>
                                     <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $lignefraisforfait->id], ['confirm' => __('Are you sure you want to delete # {0}?', $lignefraisforfait->id)]) ?>
                                 </td>
                             </tr>
@@ -71,7 +72,8 @@
                     <br><br>
 
                     <legend><?= __('Editer Lignes frais hors forfait') ?></legend>
- 
+                    
+                    <button>Ajouter une ligne</button>
 
                     <table>
                         <thead>
@@ -82,16 +84,14 @@
                             <th>Action</th>
                         </tr>
                         </thead>
-                        <?php //A REVOIR ?>
-                        <?php foreach ($fichefrai->lignefraishf as $lignefraishf): ?>
 
+                        <?php foreach ($fichefrai->lignefraishf as $lignefraishf): ?>
                         <tr>
                             <td><?= $this->Number->format($lignefraishf->id) ?></td>
                             <td><?= ($lignefraishf->label) ?></td>
                             <td><?= $this->Number->format($lignefraishf->montant) ?></td>
                             <td class="actions">
-                                    <?= $this->Html->link(__('View'), ['action' => 'view', $lignefraishf->id]) ?>
-                                    <?= $this->Html->link(__('Edit'), ['action' => 'edit', $lignefraishf->id]) ?>
+                                    <a href = "http://localhost:8765/lignefraishf/modify/<?php echo $lignefraishf->id ?>">Modify</a>
                                     <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $lignefraishf->id], ['confirm' => __('Are you sure you want to delete # {0}?', $lignefraisforfait->id)]) ?>
                             </td>
                         </tr>
@@ -118,7 +118,7 @@
                     $sommeLignes = $somme + $sommeHF;
                     echo $sommeLignes,'€';
                     ?>
-                    
+
             </fieldset>
             <?= $this->Form->button(__('Valider')) ?>
             <?= $this->Form->end() ?>

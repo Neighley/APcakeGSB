@@ -9,11 +9,11 @@ use Cake\ORM\Entity;
  * Lignefraisforfait Entity
  *
  * @property int $id
- * @property int $label
  * @property int $quantite
  * @property int $fraisforfait_id
  *
  * @property \App\Model\Entity\Fichefrai[] $fichefrais
+ * @property \App\Model\Entity\Fraisforfait $fraisforfait
  */
 class Lignefraisforfait extends Entity
 {
@@ -27,9 +27,9 @@ class Lignefraisforfait extends Entity
      * @var array<string, bool>
      */
     protected $_accessible = [
-        'label' => true,
         'quantite' => true,
         'fraisforfait_id' => true,
         'fichefrais' => true,
+        'fraisforfait' => true,
     ];
 }

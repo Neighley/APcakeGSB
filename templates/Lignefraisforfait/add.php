@@ -2,6 +2,7 @@
 /**
  * @var \App\View\AppView $this
  * @var \App\Model\Entity\Lignefraisforfait $lignefraisforfait
+ * @var \Cake\Collection\CollectionInterface|string[] $fraisforfait
  * @var \Cake\Collection\CollectionInterface|string[] $fichefrais
  */
 ?>
@@ -18,9 +19,8 @@
             <fieldset>
                 <legend><?= __('Add Lignefraisforfait') ?></legend>
                 <?php
-                    echo $this->Form->control('label');
                     echo $this->Form->control('quantite');
-                    echo $this->Form->control('fraisforfait_id');
+                    echo $this->Form->control('fraisforfait_id', ['options' => $fraisforfait]);
                     echo $this->Form->control('fichefrais._ids', ['options' => $fichefrais]);
                 ?>
             </fieldset>
