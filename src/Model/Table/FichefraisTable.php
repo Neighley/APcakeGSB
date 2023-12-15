@@ -98,8 +98,8 @@ class FichefraisTable extends Table
         $validator
             ->integer('etat_id')
             ->requirePresence('etat_id', 'create')
-            ->notEmptyString('etat_id')
-            ->add('etat_id', 'unique', ['rule' => 'validateUnique', 'provider' => 'table']);
+            ->notEmptyString('etat_id');
+            //->add('etat_id', 'unique', ['rule' => 'validateUnique', 'provider' => 'table']);
 
         return $validator;
     }
@@ -114,7 +114,7 @@ class FichefraisTable extends Table
     public function buildRules(RulesChecker $rules): RulesChecker
     {
         $rules->add($rules->existsIn('user_id', 'Users'), ['errorField' => 'user_id']);
-        $rules->add($rules->isUnique(['etat_id']), ['errorField' => 'etat_id']);
+      //  $rules->add($rules->isUnique(['etat_id']), ['errorField' => 'etat_id']);
 
         return $rules;
     }

@@ -97,6 +97,27 @@ return [
             ],
             'bypassAuth' => true,
         ],
+        [
+            'prefix' => false,
+            'controller' => 'Fichefrais',
+            'role_id' => 'admin', 'comptable',
+            'action' => [
+                'validateFiche',
+                'closeFiche',
+            ],            
+        ],
+        [
+            'prefix' => false,
+            'controller' => 'Fichefrais',
+            'role_id' => 'visiteur',
+            'action' => [
+                'list',
+                'display',
+                'add',
+                'view',
+                'create',
+            ],            
+        ],
         //admin role allowed to all the things
         [
             'role' => 'admin',

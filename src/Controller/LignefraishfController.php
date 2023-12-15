@@ -60,6 +60,22 @@ class LignefraishfController extends AppController
         $this->set(compact('lignefraishf', 'fichefrais'));
     }
 
+    public function create()
+    {
+        $lignefraishf = $this->Lignefraishf->newEmptyEntity();
+        if ($this->request->is('post')) {
+            $lignefraishf = $this->Lignefraishf->patchEntity($lignefraishf, $this->request->getData());
+            if ($this->Lignefraishf->save($lignefraishf)) {
+                $this->Flash->success(__('The lignefraishf has been saved.'));
+
+                return $this->redirect(['action' => 'index']);
+            }
+            $this->Flash->error(__('The lignefraishf could not be saved. Please, try again.'));
+        }
+        $fichefrais = $this->Lignefraishf->Fichefrais->find('list', ['limit' => 200])->all();
+        $this->set(compact('lignefraishf', 'fichefrais'));
+    }
+
     /**
      * Edit method
      *
@@ -93,9 +109,10 @@ class LignefraishfController extends AppController
         if ($this->request->is(['patch', 'post', 'put'])) {
             $lignefraishf = $this->Lignefraishf->patchEntity($lignefraishf, $this->request->getData());
             if ($this->Lignefraishf->save($lignefraishf)) {
-                $this->Flash->success(__('The lignefraishf has been saved.'));
+                $this->Flash->success(__('La ligne frais hors forfait a bien été sauvegardée.'));
 
-                return $this->redirect(['action' => 'index']);
+                $idfiche = $lignefraishf->fichefrais[0]->id;
+                return $this->redirect(['controller' => 'fichefrais', 'action' => 'display', $idfiche]);
             }
             $this->Flash->error(__('The lignefraishf could not be saved. Please, try again.'));
         }

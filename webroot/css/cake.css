@@ -4,6 +4,50 @@ body {
     font-weight: 400;
 }
 
+.boutoncloturer {
+    display: inline-block;
+    padding: 8px 15px;
+    font-size: 14px;
+    font-weight: bold;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+    border: 1px solid #e74c3c;
+    border-radius: 3px;
+    color: #fff;
+    background-color: #e74c3c;
+    transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+}
+
+.boutoncloturer:hover {
+    background-color: grey;
+    color: #e74c3c;
+    border-color: grey;
+}
+
+.boutonvalider {
+    display: inline-block;
+    padding: 8px 15px;
+    margin-left : 15px;
+    font-size: 14px;
+    font-weight: bold;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+    border: 1px solid #e74c3c;
+    border-radius: 3px;
+    color: #fff;
+    background-color: #e74c3c;
+    transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+}
+
+.boutonvalider:hover {
+    background-color: grey;
+    color: #e74c3c;
+    border-color: grey;
+}
+
+
 .top-nav-links,
 .side-nav,
 h1, h2, h3, h4, h5, h6 {
@@ -198,6 +242,10 @@ th {
     justify-content: center;
 }
 
+.grosbouton {
+    color : white;
+}
+
 @media screen and (max-width: 640px) {
     .top-nav {
         margin: 0 auto;
@@ -219,3 +267,5 @@ th {
         content: " \2190";
     }
 }
+
+

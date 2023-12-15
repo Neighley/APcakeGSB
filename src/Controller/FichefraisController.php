@@ -37,6 +37,17 @@ class FichefraisController extends AppController
         $this->set(compact('fichefrais'));
     }
 
+    public function listall()
+    {
+        $identity = $this->getRequest()->getAttribute('identity');
+        $identity = $identity ?? [];
+        $iduser = $identity["id"];
+
+        $fichefrais_req = $this->Fichefrais->find('all', ['contain' => ['Etats']]);
+        $fichefrais = $this->paginate($fichefrais_req);
+        $this->set(compact('fichefrais'));
+    }
+
     /**
      * View method
      *
@@ -146,6 +157,26 @@ class FichefraisController extends AppController
         $this->set(compact('fichefrai', 'users', 'lignefraisforfait', 'lignefraishf'));
     }
 
+    public function displayetat($id = null)
+    {
+        $fichefrai = $this->Fichefrais->get($id, [
+            'contain' => ['Lignefraisforfait', 'Lignefraishf','Lignefraisforfait.Fraisforfait'],
+        ]);
+        if ($this->request->is(['patch', 'post', 'put'])) {
+            $fichefrai = $this->Fichefrais->patchEntity($fichefrai, $this->request->getData());
+            if ($this->Fichefrais->save($fichefrai)) {
+                $this->Flash->success(__('The fichefrai has been saved.'));
+
+                return $this->redirect(['action' => 'index']);
+            }
+            $this->Flash->error(__('The fichefrai could not be saved. Please, try again.'));
+        }
+        $users = $this->Fichefrais->Users->find('list', ['limit' => 200])->all();
+        $lignefraisforfait = $this->Fichefrais->Lignefraisforfait->find('list', ['limit' => 200])->all();
+        $lignefraishf = $this->Fichefrais->Lignefraishf->find('list', ['limit' => 200])->all();
+        $this->set(compact('fichefrai', 'users', 'lignefraisforfait', 'lignefraishf'));
+    }
+
     /**
      * Delete method
      *
@@ -158,11 +189,59 @@ class FichefraisController extends AppController
         $this->request->allowMethod(['post', 'delete']);
         $fichefrai = $this->Fichefrais->get($id);
         if ($this->Fichefrais->delete($fichefrai)) {
-            $this->Flash->success(__('The fichefrai has been deleted.'));
+            $this->Flash->success(__('La fiche de frais a été supprimée.'));
         } else {
-            $this->Flash->error(__('The fichefrai could not be deleted. Please, try again.'));
+            $this->Flash->error(__("La fiche de frais n'a pas pu être supprimée. Veuillez réessayer."));
         }
 
         return $this->redirect(['action' => 'index']);
     }
+
+    public function closeFiche($id = null)
+    {
+        $fichefrai = $this->Fichefrais->get($id, [
+            'contain' => ['Lignefraisforfait', 'Lignefraishf','Lignefraisforfait.Fraisforfait'],
+        ]);
+       // debug($fichefrai);
+        $fichefrai->etat_id = 2;
+       
+
+        if ($this->Fichefrais->save($fichefrai)) {
+            $this->Flash->success(__('Fiche frais clôturée.'));
+            } 
+        else {
+            $this->Flash->error(__('Erreur lors de la clôture de la fiche. Peut-être que la fiche a déjà été clôturée.'));
+            $users = $this->Fichefrais->Users->find('list', ['limit' => 200])->all();
+            $lignefraisforfait = $this->Fichefrais->Lignefraisforfait->find('list', ['limit' => 200])->all();
+            $lignefraishf = $this->Fichefrais->Lignefraishf->find('list', ['limit' => 200])->all();
+            $this->set(compact('fichefrai', 'users', 'lignefraisforfait', 'lignefraishf'));
+          //  debug($fichefrai);
+            return $this->render("displayetat");
+            }
+
+        return $this->redirect(['action' => 'listall']);
+    }
+
+    public function validateFiche($id = null)
+    {
+        $fichefrai = $this->Fichefrais->get($id, [
+            'contain' => ['Lignefraisforfait', 'Lignefraishf','Lignefraisforfait.Fraisforfait'],
+        ]);
+        $fichefrai->etat_id = 3;
+
+        if ($this->Fichefrais->save($fichefrai)) {
+            $this->Flash->success(__('Fiche frais validée.'));
+            } 
+        else {
+            $this->Flash->error(__('Erreur lors de la validation de la fiche. Peut-être que la fiche a déjà été validée.'));
+            $users = $this->Fichefrais->Users->find('list', ['limit' => 200])->all();
+            $lignefraisforfait = $this->Fichefrais->Lignefraisforfait->find('list', ['limit' => 200])->all();
+            $lignefraishf = $this->Fichefrais->Lignefraishf->find('list', ['limit' => 200])->all();
+            $this->set(compact('fichefrai', 'users', 'lignefraisforfait', 'lignefraishf')); 
+            return $this->render("displayetat");
+            }
+
+        return $this->redirect(['action' => 'listall']);
+    }
+
 }

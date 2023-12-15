@@ -23,15 +23,7 @@
         <div class="fichefrais form content">
             <?= $this->Form->create($fichefrai) ?>
             <fieldset>
-                <legend><?= __('Modifier la fiche de frais') ?></legend>
-                <?php
-                    echo $this->Form->control('Année');
-                    echo $this->Form->control('mois');
-                    //echo $this->Form->control('lignefraisforfait._ids', ['options' => $lignefraisforfait]);
-                    //echo $this->Form->control('lignefraishf._ids', ['options' => $lignefraishf]);
-                ?>
-                <br><br>
-                <legend><?= __('Editer Lignes frais forfait') ?></legend>
+                <legend><?= __('Lignes frais forfait') ?></legend>
                 <a href = "http://localhost:8765/lignefraisforfait/create/<?php echo $fichefrai->id ?> " class = "button float-right">Ajouter une ligne</a>
 
                 <table>
@@ -70,7 +62,7 @@
 
                     <br><br>
 
-                    <legend><?= __('Editer Lignes frais hors forfait') ?></legend>
+                    <legend><?= __('Lignes frais hors forfait') ?></legend>
                     <a href = "http://localhost:8765/lignefraishf/create/<?php echo $fichefrai->id ?> " class = "button float-right">Ajouter une ligne</a>
 
                     <table>
@@ -118,8 +110,14 @@
                     ?>
 
             </fieldset>
-            <?= $this->Form->button(__('Valider')) ?>
+            <div class = "boutoncloturer">
+            <?= $this->Html->link('Clôturer la fiche', ['action' => 'closeFiche', $fichefrai->id], ['class' => 'grosbouton', 'confirm' => 'Êtes-vous sûr de vouloir clôturer cette fiche?']) ?>
+            </div>
+            <div class = "boutonvalider">
+            <?= $this->Html->link('Valider la fiche', ['action' => 'validateFiche', $fichefrai->id], ['class' => 'grosbouton','confirm' => 'Êtes-vous sûr de vouloir valider cette fiche?']) ?>
+            </div>
             <?= $this->Form->end() ?>
+            <br> <br> <br>
         </div>
     </div>
 </div>

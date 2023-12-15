@@ -9,7 +9,7 @@ $identity = $this->getRequest()->getAttribute('identity');
 ?>
 <div class="fichefrais index content">
     <?= $this->Html->link(__('Nouveau +'), ['action' => 'add'], ['class' => 'button float-right']) ?>
-    <h3><?= __('Fiche de frais Utilisateur de '); ?><b><?php echo $identity["username"]; ?></b></h3>
+    <h3><?= __('Toutes les Fiches de frais des utilisateurs :'); ?></h3>
     <div class="table-responsive">
         <table>
             <thead>
@@ -19,7 +19,7 @@ $identity = $this->getRequest()->getAttribute('identity');
                     <th><?= $this->Paginator->sort('mois') ?></th>
                     <th><?= $this->Paginator->sort('montantvalide', 'Montant Validé') ?></th>
                     <!--<th><?= $this->Paginator->sort('user_id') ?></th>-->
-                    <!--<th><?= $this->Paginator->sort('etat_id') ?></th>-->
+                    <th><?= $this->Paginator->sort('etat_id') ?></th>
                     <th class="actions"><?= __('Actions') ?></th>
                 </tr>
             </thead>
@@ -27,16 +27,33 @@ $identity = $this->getRequest()->getAttribute('identity');
                 <?php foreach ($fichefrais as $fichefrai): ?>
                 <tr>
                     <td><?= $this->Number->format($fichefrai->id) ?></td>
-                    <td><?= $fichefrai->annee ?></td>
+                    <td><?= $this->Number->format($fichefrai->annee) ?></td>
                     <td><?= $this->Number->format($fichefrai->mois) ?></td>
                     <td><?= $this->Number->format($fichefrai->montantvalide) ?></td>
                     <!--<td><?= $fichefrai->has('user') ? $this->Html->link($fichefrai->user->id, ['controller' => 'Users', 'action' => 'view', $fichefrai->user->id]) : '' ?></td>-->
-                    <!--<td><?= $fichefrai->has('etat') ? $this->Html->link($fichefrai->etat,['controller'=> 'Etats','actions'=> 'view',$fichefrai->etat]) : '' ?></td>-->
+                    <td><?= $fichefrai->has('etat_id') ? $this->Html->link($fichefrai->etat_id,['controller'=> 'Etats','actions'=> 'view',$fichefrai->etat_id]) : '' ?>
+                    <?php /*if($fichefrai->etat_id == 1){
+                        echo "- créée";
+                    }
+                    if($fichefrai->etat_id == 2){
+                        echo "- clôturée";
+                    }
+                    if($fichefrai->etat_id == 3){
+                        echo "- validée";
+                    }
+                    if($fichefrai->etat_id == 4){
+                        echo "- mise en paiement";
+                    }
+                    if($fichefrai->etat_id == 5){
+                        echo "- remboursée";
+                    }*/
+                    echo " - ".$fichefrai->etat->etat;
+                    ?>
+                    </td>
                     <td class="actions">
                         <?= $this->Html->link(__('Voir'), ['action' => 'view', $fichefrai->id]) ?>
                         <?php // CE QUE JAI CHANGE ATTENTION ?>
-                        <?= $this->Html->link(__('Lignes de frais'), ['action' => 'display', $fichefrai->id]) ?>
-                        <?= $this->Form->postLink(__('Supprimer'), ['action' => 'delete', $fichefrai->id], ['confirm' => __('Are you sure you want to delete # {0}?', $fichefrai->id)]) ?>
+                        <?= $this->Html->link(__("Gérer l'état"), ['action' => 'displayetat', $fichefrai->id]) ?>
                     </td>
                 </tr>
                 <?php endforeach; ?>

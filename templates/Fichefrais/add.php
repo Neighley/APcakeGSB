@@ -11,7 +11,7 @@
     <aside class="column">
         <div class="side-nav">
             <h4 class="heading"><?= __('Actions') ?></h4>
-            <?= $this->Html->link(__('List Fichefrais'), ['action' => 'index'], ['class' => 'side-nav-item']) ?>
+            <?= $this->Html->link(__('Liste fiches de frais'), ['action' => 'index'], ['class' => 'side-nav-item']) ?>
         </div>
     </aside>
     <div class="column-responsive column-80">
@@ -20,13 +20,13 @@
             <fieldset>
                 <legend><?= __('Créer une nouvelle fiche de frais') ?></legend>
                 <?php
-                    echo $this->Form->control('annee');
+                    echo $this->Form->control('Année');
                     echo $this->Form->control('mois');
-                    echo $this->Form->control('montantvalide');
-                    echo $this->Form->control('user_id', ['options' => $users]);
-                    echo $this->Form->control('etat_id', ['options' => $etats]);
-                    echo $this->Form->control('lignefraisforfait._ids', ['options' => $lignefraisforfait]);
-                    echo $this->Form->control('lignefraishf._ids', ['options' => $lignefraishf]);
+                    echo $this->Form->control('Montant validé');
+                    echo $this->Form->control('Utilisateur', ['options' => $users]);
+                    echo $this->Form->control('Etat de la fiche', ['options' => $etats]);
+                    //echo $this->Form->control('lignefraisforfait._ids', ['options' => $lignefraisforfait]);
+                    //echo $this->Form->control('lignefraishf._ids', ['options' => $lignefraishf]);
                 ?>
             </fieldset>
             <?= $this->Form->button(__('Submit')) ?>
