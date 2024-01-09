@@ -17,14 +17,14 @@
         <div class="lignefraisforfait form content">
             <?= $this->Form->create($lignefraisforfait) ?>
             <fieldset>
-                <legend><?= __('Add Lignefraisforfait') ?></legend>
+                <legend><?= __('Ajouter Ligne de frais forfait') ?></legend>
                 <?php
                     echo $this->Form->control('quantite');
                     echo $this->Form->control('fraisforfait_id', ['options' => $fraisforfait]);
                     echo $this->Form->hidden('fichefrais._ids', ['name' => 'Fichefrais', 'value' => 'name']);
                 ?>
             </fieldset>
-            <?= $this->Form->button(__('Submit')) ?>
+            <?= $this->Form->button(__('Valider')) ?>
             <?= $this->Form->end() ?>
         </div>
     </div>

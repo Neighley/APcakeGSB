@@ -50,11 +50,11 @@ class LignefraishfController extends AppController
         if ($this->request->is('post')) {
             $lignefraishf = $this->Lignefraishf->patchEntity($lignefraishf, $this->request->getData());
             if ($this->Lignefraishf->save($lignefraishf)) {
-                $this->Flash->success(__('The lignefraishf has been saved.'));
+                $this->Flash->success(__('La ligne de frais hors forfait a bien été ajoutée.'));
 
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('The lignefraishf could not be saved. Please, try again.'));
+            $this->Flash->error(__("La ligne de frais hors forfait n'a pas pu être ajoutée. Veuillez réessayer"));
         }
         $fichefrais = $this->Lignefraishf->Fichefrais->find('list', ['limit' => 200])->all();
         $this->set(compact('lignefraishf', 'fichefrais'));
@@ -66,11 +66,11 @@ class LignefraishfController extends AppController
         if ($this->request->is('post')) {
             $lignefraishf = $this->Lignefraishf->patchEntity($lignefraishf, $this->request->getData());
             if ($this->Lignefraishf->save($lignefraishf)) {
-                $this->Flash->success(__('The lignefraishf has been saved.'));
+                $this->Flash->success(__('La lign de frais hors forfait a bien été créée.'));
 
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('The lignefraishf could not be saved. Please, try again.'));
+            $this->Flash->error(__("La ligne de frais hors forfait n'a pas pu être créée. Veuillez réessayer"));
         }
         $fichefrais = $this->Lignefraishf->Fichefrais->find('list', ['limit' => 200])->all();
         $this->set(compact('lignefraishf', 'fichefrais'));
@@ -91,11 +91,11 @@ class LignefraishfController extends AppController
         if ($this->request->is(['patch', 'post', 'put'])) {
             $lignefraishf = $this->Lignefraishf->patchEntity($lignefraishf, $this->request->getData());
             if ($this->Lignefraishf->save($lignefraishf)) {
-                $this->Flash->success(__('The lignefraishf has been saved.'));
+                $this->Flash->success(__('La fiche de frais hors forfait a bien été modifiée.'));
 
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('The lignefraishf could not be saved. Please, try again.'));
+            $this->Flash->error(__("La ligne de frais hors forfait n'a pas pu être modifiée. Veuillez réessayer"));
         }
         $fichefrais = $this->Lignefraishf->Fichefrais->find('list', ['limit' => 200])->all();
         $this->set(compact('lignefraishf', 'fichefrais'));
@@ -109,12 +109,12 @@ class LignefraishfController extends AppController
         if ($this->request->is(['patch', 'post', 'put'])) {
             $lignefraishf = $this->Lignefraishf->patchEntity($lignefraishf, $this->request->getData());
             if ($this->Lignefraishf->save($lignefraishf)) {
-                $this->Flash->success(__('La ligne frais hors forfait a bien été sauvegardée.'));
+                $this->Flash->success(__('La ligne de frais hors forfait a bien été modifiée.'));
 
                 $idfiche = $lignefraishf->fichefrais[0]->id;
                 return $this->redirect(['controller' => 'fichefrais', 'action' => 'display', $idfiche]);
             }
-            $this->Flash->error(__('The lignefraishf could not be saved. Please, try again.'));
+            $this->Flash->error(__("La ligne de frais hors forfait n'a pas pu être modifiée. Veuillez réessayer"));
         }
         $fichefrais = $this->Lignefraishf->Fichefrais->find('list', ['limit' => 200])->all();
         $this->set(compact('lignefraishf', 'fichefrais'));
@@ -132,9 +132,9 @@ class LignefraishfController extends AppController
         $this->request->allowMethod(['post', 'delete']);
         $lignefraishf = $this->Lignefraishf->get($id);
         if ($this->Lignefraishf->delete($lignefraishf)) {
-            $this->Flash->success(__('The lignefraishf has been deleted.'));
+            $this->Flash->success(__('La fiche de frais hors forfait a bien été supprimée.'));
         } else {
-            $this->Flash->error(__('The lignefraishf could not be deleted. Please, try again.'));
+            $this->Flash->error(__("La ligne de frais hors forfait n'a pas pu être supprimée. Veuillez réessayer"));
         }
 
         return $this->redirect(['action' => 'index']);

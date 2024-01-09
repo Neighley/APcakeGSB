@@ -9,7 +9,7 @@
         <div class="side-nav">
             <h4 class="heading"><?= __('Actions') ?></h4>
             <?= $this->Html->link(__('Edit Lignefraishf'), ['action' => 'edit', $lignefraishf->id], ['class' => 'side-nav-item']) ?>
-            <?= $this->Form->postLink(__('Delete Lignefraishf'), ['action' => 'delete', $lignefraishf->id], ['confirm' => __('Are you sure you want to delete # {0}?', $lignefraishf->id), 'class' => 'side-nav-item']) ?>
+            <?= $this->Form->postLink(__('Delete Lignefraishf'), ['action' => 'delete', $lignefraishf->id], ['confirm' => __('Êtes-vous sûr de vouloir supprimer # {0}?', $lignefraishf->id), 'class' => 'side-nav-item']) ?>
             <?= $this->Html->link(__('List Lignefraishf'), ['action' => 'index'], ['class' => 'side-nav-item']) ?>
             <?= $this->Html->link(__('New Lignefraishf'), ['action' => 'add'], ['class' => 'side-nav-item']) ?>
         </div>
@@ -32,7 +32,7 @@
                 </tr>
             </table>
             <div class="related">
-                <h4><?= __('Related Fichefrais') ?></h4>
+                <h4><?= __('Concernant la fiche de frais') ?></h4>
                 <?php if (!empty($lignefraishf->fichefrais)) : ?>
                 <div class="table-responsive">
                     <table>
@@ -56,7 +56,7 @@
                             <td class="actions">
                                 <?= $this->Html->link(__('View'), ['controller' => 'Fichefrais', 'action' => 'view', $fichefrais->id]) ?>
                                 <?= $this->Html->link(__('Edit'), ['controller' => 'Fichefrais', 'action' => 'edit', $fichefrais->id]) ?>
-                                <?= $this->Form->postLink(__('Delete'), ['controller' => 'Fichefrais', 'action' => 'delete', $fichefrais->id], ['confirm' => __('Are you sure you want to delete # {0}?', $fichefrais->id)]) ?>
+                                <?= $this->Form->postLink(__('Delete'), ['controller' => 'Fichefrais', 'action' => 'delete', $fichefrais->id], ['confirm' => __('Êtes-vous sûr de vouloir supprimer # {0}?', $fichefrais->id)]) ?>
                             </td>
                         </tr>
                         <?php endforeach; ?>

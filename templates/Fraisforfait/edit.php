@@ -11,7 +11,7 @@
             <?= $this->Form->postLink(
                 __('Delete'),
                 ['action' => 'delete', $fraisforfait->id],
-                ['confirm' => __('Are you sure you want to delete # {0}?', $fraisforfait->id), 'class' => 'side-nav-item']
+                ['confirm' => __('Êtes-vous sûr de vouloir supprimer # {0}?', $fraisforfait->id), 'class' => 'side-nav-item']
             ) ?>
             <?= $this->Html->link(__('List Fraisforfait'), ['action' => 'index'], ['class' => 'side-nav-item']) ?>
         </div>
@@ -26,7 +26,7 @@
                     echo $this->Form->control('label');
                 ?>
             </fieldset>
-            <?= $this->Form->button(__('Submit')) ?>
+            <?= $this->Form->button(__('Valider')) ?>
             <?= $this->Form->end() ?>
         </div>
     </div>

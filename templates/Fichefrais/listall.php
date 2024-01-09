@@ -68,6 +68,6 @@ $identity = $this->getRequest()->getAttribute('identity');
             <?= $this->Paginator->next(__('prochain') . ' >') ?>
             <?= $this->Paginator->last(__('last') . ' >>') ?>
         </ul>
-        <p><?= $this->Paginator->counter(__('Page {{page}} sur {{pages}}, montrant {{current}} résultat(s) sur {{count}} résultats au total')) ?></p>
+        <p><?= $this->Paginator->counter(__('Page {{page}} sur {{pages}}, montrant {{current}} résultat(s) sur {{count}} au total')) ?></p>
     </div>
 </div>

@@ -11,7 +11,7 @@
             <?= $this->Form->postLink(
                 __('Delete'),
                 ['action' => 'delete', $etat->id],
-                ['confirm' => __('Are you sure you want to delete # {0}?', $etat->id), 'class' => 'side-nav-item']
+                ['confirm' => __('Êtes-vous sûr de vouloir supprimer # {0}?', $etat->id), 'class' => 'side-nav-item']
             ) ?>
             <?= $this->Html->link(__('List Etat'), ['action' => 'index'], ['class' => 'side-nav-item']) ?>
         </div>
@@ -20,12 +20,12 @@
         <div class="etat form content">
             <?= $this->Form->create($etat) ?>
             <fieldset>
-                <legend><?= __('Edit Etat') ?></legend>
+                <legend><?= __("Modifier l'état") ?></legend>
                 <?php
                     echo $this->Form->control('etat');
                 ?>
             </fieldset>
-            <?= $this->Form->button(__('Submit')) ?>
+            <?= $this->Form->button(__('Valider')) ?>
             <?= $this->Form->end() ?>
         </div>
     </div>

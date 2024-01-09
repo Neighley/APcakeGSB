@@ -14,7 +14,7 @@
             <?= $this->Form->postLink(
                 __('Delete'),
                 ['action' => 'delete', $fichefrai->id],
-                ['confirm' => __('Are you sure you want to delete # {0}?', $fichefrai->id), 'class' => 'side-nav-item']
+                ['confirm' => __('Êtes-vous sûr de vouloir supprimer # {0}?', $fichefrai->id), 'class' => 'side-nav-item']
             ) ?>
             <?= $this->Html->link(__('List Fichefrais'), ['action' => 'index'], ['class' => 'side-nav-item']) ?>
         </div>
@@ -30,7 +30,7 @@
                     echo $this->Form->control('lignefraisforfait._label');
                 ?>
             </fieldset>
-            <?= $this->Form->button(__('Submit')) ?>
+            <?= $this->Form->button(__('Valider')) ?>
             <?= $this->Form->end() ?>
         </div>
     </div>

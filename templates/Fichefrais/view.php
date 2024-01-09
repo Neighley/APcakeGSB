@@ -9,7 +9,7 @@
         <div class="side-nav">
             <h4 class="heading"><?= __('Actions') ?></h4>
             <?= $this->Html->link(__('Editer'), ['action' => 'edit', $fichefrai->id], ['class' => 'side-nav-item']) ?>
-            <?= $this->Form->postLink(__('Supprimer'), ['action' => 'delete', $fichefrai->id], ['confirm' => __('Are you sure you want to delete # {0}?', $fichefrai->id), 'class' => 'side-nav-item']) ?>
+            <?= $this->Form->postLink(__('Supprimer'), ['action' => 'delete', $fichefrai->id], ['confirm' => __('Êtes-vous sûr de vouloir supprimer # {0}?', $fichefrai->id), 'class' => 'side-nav-item']) ?>
             <?= $this->Html->link(__('Liste des Fiche de frais'), ['action' => 'index'], ['class' => 'side-nav-item']) ?>
             <?= $this->Html->link(__('Nouvelle Fiche de frais'), ['action' => 'add'], ['class' => 'side-nav-item']) ?>
         </div>
@@ -44,7 +44,7 @@
                 </tr>
             </table>
             <div class="related">
-                <h4><?= __('Ligne de frais forfaits trouvées :') ?></h4>
+                <h4><?= __('Lignes de frais forfaits trouvées :') ?></h4>
                 <?php if (!empty($fichefrai->lignefraisforfait)) : ?>
                 <div class="table-responsive">
                     <table>
@@ -64,7 +64,7 @@
                             <td class="actions">
                                 <?= $this->Html->link(__('Voir'), ['controller' => 'Lignefraisforfait', 'action' => 'view', $lignefraisforfait->id]) ?>
                                 <?= $this->Html->link(__('Modifier'), ['controller' => 'Lignefraisforfait', 'action' => 'edit', $lignefraisforfait->id]) ?>
-                                <?= $this->Form->postLink(__('Supprimer'), ['controller' => 'Lignefraisforfait', 'action' => 'delete', $lignefraisforfait->id], ['confirm' => __('Are you sure you want to delete # {0}?', $lignefraisforfait->id)]) ?>
+                                <?= $this->Form->postLink(__('Supprimer'), ['controller' => 'Lignefraisforfait', 'action' => 'delete', $lignefraisforfait->id], ['confirm' => __('Êtes-vous sûr de vouloir supprimer # {0}?', $lignefraisforfait->id)]) ?>
                             </td>
                         </tr>
                         <?php endforeach; ?>
@@ -91,7 +91,7 @@
                             <td class="actions">
                                 <?= $this->Html->link(__('Voir'), ['controller' => 'Lignefraishf', 'action' => 'view', $lignefraishf->id]) ?>
                                 <?= $this->Html->link(__('Modifier'), ['controller' => 'Lignefraishf', 'action' => 'edit', $lignefraishf->id]) ?>
-                                <?= $this->Form->postLink(__('Supprimer'), ['controller' => 'Lignefraishf', 'action' => 'delete', $lignefraishf->id], ['confirm' => __('Are you sure you want to delete # {0}?', $lignefraishf->id)]) ?>
+                                <?= $this->Form->postLink(__('Supprimer'), ['controller' => 'Lignefraishf', 'action' => 'delete', $lignefraishf->id], ['confirm' => __('Êtes-vous sûr de vouloir supprimer # {0}?', $lignefraishf->id)]) ?>
                             </td>
                         </tr>
                         <?php endforeach; ?>

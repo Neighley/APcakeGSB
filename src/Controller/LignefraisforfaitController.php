@@ -53,11 +53,11 @@ class LignefraisforfaitController extends AppController
         if ($this->request->is('post')) {
             $lignefraisforfait = $this->Lignefraisforfait->patchEntity($lignefraisforfait, $this->request->getData());
             if ($this->Lignefraisforfait->save($lignefraisforfait)) {
-                $this->Flash->success(__('The lignefraisforfait has been saved.'));
+                $this->Flash->success(__('La ligne de frais forfait a bien été ajoutée.'));
 
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('The lignefraisforfait could not be saved. Please, try again.'));
+            $this->Flash->error(__("La ligne de frais forfait n'a pas pu être ajoutée. Veuillez réessayer."));
         }
         $fraisforfait = $this->Lignefraisforfait->Fraisforfait->find('list', ['limit' => 200])->all();
         $fichefrais = $this->Lignefraisforfait->Fichefrais->find('list', ['limit' => 200])->all();
@@ -70,11 +70,11 @@ class LignefraisforfaitController extends AppController
         if ($this->request->is('post')) {
             $lignefraisforfait = $this->Lignefraisforfait->patchEntity($lignefraisforfait, $this->request->getData());
             if ($this->Lignefraisforfait->save($lignefraisforfait)) {
-                $this->Flash->success(__('The lignefraisforfait has been saved.'));
+                $this->Flash->success(__('La ligne de frais forfait a bien été créée.'));
 
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('The lignefraisforfait could not be saved. Please, try again.'));
+            $this->Flash->error(__("La ligne de frais forfait n'a pas pu être créée. Veuillez réessayer."));
         }
         $fraisforfait = $this->Lignefraisforfait->Fraisforfait->find('list', ['limit' => 200])->all();
         $fichefrais = $this->Lignefraisforfait->Fichefrais->find('list', ['limit' => 200])->all();
@@ -96,11 +96,11 @@ class LignefraisforfaitController extends AppController
         if ($this->request->is(['patch', 'post', 'put'])) {
             $lignefraisforfait = $this->Lignefraisforfait->patchEntity($lignefraisforfait, $this->request->getData());
             if ($this->Lignefraisforfait->save($lignefraisforfait)) {
-                $this->Flash->success(__('The lignefraisforfait has been saved.'));
+                $this->Flash->success(__('La ligne de frais forfait a bien été modifiée.'));
 
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('The lignefraisforfait could not be saved. Please, try again.'));
+            $this->Flash->error(__("La ligne de frais forfait n'a pas pu être modifiée. Veuillez réessayer."));
         }
         $fraisforfait = $this->Lignefraisforfait->Fraisforfait->find('list', ['limit' => 200])->all();
         $fichefrais = $this->Lignefraisforfait->Fichefrais->find('list', ['limit' => 200])->all();
@@ -115,11 +115,11 @@ class LignefraisforfaitController extends AppController
         if ($this->request->is(['patch', 'post', 'put'])) {
             $lignefraisforfait = $this->Lignefraisforfait->patchEntity($lignefraisforfait, $this->request->getData());
             if ($this->Lignefraisforfait->save($lignefraisforfait)) {
-                $this->Flash->success(__('La ligne frais forfait a bien été sauvegardée.'));
+                $this->Flash->success(__('La ligne frais forfait a bien été modifiée.'));
                 $idfiche = $lignefraisforfait->fichefrais[0]->id;
                 return $this->redirect(['controller' => 'fichefrais', 'action' => 'display', $idfiche]);
             }
-            $this->Flash->error(__('The lignefraisforfait could not be saved. Please, try again.'));
+            $this->Flash->error(__("La ligne de frais forfait n'a pas pu être modifiée. Veuillez réessayer."));
         }
         $fraisforfait = $this->Lignefraisforfait->Fraisforfait->find('list', ['limit' => 200])->all();
         $fichefrais = $this->Lignefraisforfait->Fichefrais->find('list', ['limit' => 200])->all();
@@ -138,9 +138,9 @@ class LignefraisforfaitController extends AppController
         $this->request->allowMethod(['post', 'delete']);
         $lignefraisforfait = $this->Lignefraisforfait->get($id);
         if ($this->Lignefraisforfait->delete($lignefraisforfait)) {
-            $this->Flash->success(__('The lignefraisforfait has been deleted.'));
+            $this->Flash->success(__('La ligne de frais forfait a bien été supprimée.'));
         } else {
-            $this->Flash->error(__('The lignefraisforfait could not be deleted. Please, try again.'));
+            $this->Flash->error(__("La ligne de frais forfait n'a pas pu être supprimée. Veuillez réessayer."));
         }
 
         return $this->redirect(['action' => 'index']);

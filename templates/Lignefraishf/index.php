@@ -20,13 +20,13 @@
             <tbody>
                 <?php foreach ($lignefraishf as $lignefraishf): ?>
                 <tr>
-                    <td><?= $this->Number->format($lignefraishf->id) ?></td>
-                    <td><?= $this->Number->format($lignefraishf->montant) ?>€</td>
-                    <td><?= h($lignefraishf->label) ?></td>
+                    <td><?= $this->Number->format($lignefraihf->id) ?></td>
+                    <td><?= $this->Number->format($lignefraihf->montant) ?>€</td>
+                    <td><?= h($lignefraihf->label) ?></td>
                     <td class="actions">
-                        <?= $this->Html->link(__('View'), ['action' => 'view', $lignefraishf->id]) ?>
-                        <?= $this->Html->link(__('Edit'), ['action' => 'edit', $lignefraishf->id]) ?>
-                        <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $lignefraishf->id], ['confirm' => __('Are you sure you want to delete # {0}?', $lignefraishf->id)]) ?>
+                        <?= $this->Html->link(__('View'), ['action' => 'view', $lignefraihf->id]) ?>
+                        <?= $this->Html->link(__('Edit'), ['action' => 'edit', $lignefraihf->id]) ?>
+                        <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $lignefraihf->id], ['confirm' => __('Êtes-vous sûr de vouloir supprimer # {0}?', $lignefraihf->id)]) ?>
                     </td>
                 </tr>
                 <?php endforeach; ?>
@@ -35,12 +35,12 @@
     </div>
     <div class="paginator">
         <ul class="pagination">
-            <?= $this->Paginator->first('<< ' . __('first')) ?>
-            <?= $this->Paginator->prev('< ' . __('previous')) ?>
+            <?= $this->Paginator->first('<< ' . __('Premier')) ?>
+            <?= $this->Paginator->prev('< ' . __('Précédent')) ?>
             <?= $this->Paginator->numbers() ?>
-            <?= $this->Paginator->next(__('next') . ' >') ?>
-            <?= $this->Paginator->last(__('last') . ' >>') ?>
+            <?= $this->Paginator->next(__('Suivant') . ' >') ?>
+            <?= $this->Paginator->last(__('Dernier') . ' >>') ?>
         </ul>
-        <p><?= $this->Paginator->counter(__('Page {{page}} of {{pages}}, showing {{current}} record(s) out of {{count}} total')) ?></p>
+        <p><?= $this->Paginator->counter(__('Page {{page}} sur {{pages}}, montrant {{current}} résultat(s) sur {{count}} au total')) ?></p>
     </div>
 </div>

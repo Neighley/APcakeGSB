@@ -15,12 +15,12 @@
         <div class="etat form content">
             <?= $this->Form->create($etat) ?>
             <fieldset>
-                <legend><?= __('Add Etat') ?></legend>
+                <legend><?= __('Ajouter un état') ?></legend>
                 <?php
                     echo $this->Form->control('etat');
                 ?>
             </fieldset>
-            <?= $this->Form->button(__('Submit')) ?>
+            <?= $this->Form->button(__('Valider')) ?>
             <?= $this->Form->end() ?>
         </div>
     </div>

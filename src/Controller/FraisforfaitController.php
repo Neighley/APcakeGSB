@@ -50,11 +50,11 @@ class FraisforfaitController extends AppController
         if ($this->request->is('post')) {
             $fraisforfait = $this->Fraisforfait->patchEntity($fraisforfait, $this->request->getData());
             if ($this->Fraisforfait->save($fraisforfait)) {
-                $this->Flash->success(__('The fraisforfait has been saved.'));
+                $this->Flash->success(__('Le frais forfaitaire a bie été ajouté.'));
 
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('The fraisforfait could not be saved. Please, try again.'));
+            $this->Flash->error(__("Le frais forfaitaire n'a pas pu être ajouté. Veuillez réessayer."));
         }
         $this->set(compact('fraisforfait'));
     }
@@ -74,11 +74,11 @@ class FraisforfaitController extends AppController
         if ($this->request->is(['patch', 'post', 'put'])) {
             $fraisforfait = $this->Fraisforfait->patchEntity($fraisforfait, $this->request->getData());
             if ($this->Fraisforfait->save($fraisforfait)) {
-                $this->Flash->success(__('The fraisforfait has been saved.'));
+                $this->Flash->success(__('Le frais forfaitaire a bien été modifié.'));
 
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('The fraisforfait could not be saved. Please, try again.'));
+            $this->Flash->error(__("Le frais forfaitaire n'a pas pu être modifié. Veuillez réessayer."));
         }
         $this->set(compact('fraisforfait'));
     }
@@ -95,9 +95,9 @@ class FraisforfaitController extends AppController
         $this->request->allowMethod(['post', 'delete']);
         $fraisforfait = $this->Fraisforfait->get($id);
         if ($this->Fraisforfait->delete($fraisforfait)) {
-            $this->Flash->success(__('The fraisforfait has been deleted.'));
+            $this->Flash->success(__('Le frais forfaitaire a bien été supprimé.'));
         } else {
-            $this->Flash->error(__('The fraisforfait could not be deleted. Please, try again.'));
+            $this->Flash->error(__("Le frais forfaitaire n'a pas pu être ajouté. Veuillez réessayer."));
         }
 
         return $this->redirect(['action' => 'index']);

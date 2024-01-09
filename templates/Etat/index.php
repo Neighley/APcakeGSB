@@ -24,7 +24,7 @@
                     <td class="actions">
                         <?= $this->Html->link(__('View'), ['action' => 'view', $etat->id]) ?>
                         <?= $this->Html->link(__('Edit'), ['action' => 'edit', $etat->id]) ?>
-                        <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $etat->id], ['confirm' => __('Are you sure you want to delete # {0}?', $etat->id)]) ?>
+                        <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $etat->id], ['confirm' => __('Êtes-vous sûr de vouloir supprimer # {0}?', $etat->id)]) ?>
                     </td>
                 </tr>
                 <?php endforeach; ?>
@@ -33,12 +33,12 @@
     </div>
     <div class="paginator">
         <ul class="pagination">
-            <?= $this->Paginator->first('<< ' . __('first')) ?>
-            <?= $this->Paginator->prev('< ' . __('previous')) ?>
+            <?= $this->Paginator->first('<< ' . __('Premier')) ?>
+            <?= $this->Paginator->prev('< ' . __('Précédent')) ?>
             <?= $this->Paginator->numbers() ?>
-            <?= $this->Paginator->next(__('next') . ' >') ?>
-            <?= $this->Paginator->last(__('last') . ' >>') ?>
+            <?= $this->Paginator->next(__('Suivant') . ' >') ?>
+            <?= $this->Paginator->last(__('Dernier') . ' >>') ?>
         </ul>
-        <p><?= $this->Paginator->counter(__('Page {{page}} of {{pages}}, showing {{current}} record(s) out of {{count}} total')) ?></p>
+        <p><?= $this->Paginator->counter(__('Page {{page}} sur {{pages}}, montrant {{current}} record(s) sur {{count}} total')) ?></p>
     </div>
 </div>

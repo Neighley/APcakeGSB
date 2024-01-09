@@ -29,7 +29,7 @@
                     //echo $this->Form->control('lignefraishf._ids', ['options' => $lignefraishf]);
                 ?>
             </fieldset>
-            <?= $this->Form->button(__('Submit')) ?>
+            <?= $this->Form->button(__('Valider')) ?>
             <?= $this->Form->end() ?>
         </div>
     </div>

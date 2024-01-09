@@ -12,7 +12,7 @@
             <?= $this->Form->postLink(
                 __('Delete'),
                 ['action' => 'delete', $lignefraishf->id],
-                ['confirm' => __('Are you sure you want to delete # {0}?', $lignefraishf->id), 'class' => 'side-nav-item']
+                ['confirm' => __('Êtes-vous sûr de vouloir supprimer # {0}?', $lignefraishf->id), 'class' => 'side-nav-item']
             ) ?>
             <?= $this->Html->link(__('List Lignefraishf'), ['action' => 'index'], ['class' => 'side-nav-item']) ?>
         </div>
@@ -21,14 +21,14 @@
         <div class="lignefraishf form content">
             <?= $this->Form->create($lignefraishf) ?>
             <fieldset>
-                <legend><?= __('Edit Lignefraishf') ?></legend>
+                <legend><?= __('Editer Ligne de frais hors forfait') ?></legend>
                 <?php
                     echo $this->Form->control('label');
                     echo $this->Form->control('montant');
                 ?>
             </fieldset>
             <?php //à revoir ça marche pas ?>
-            <?= $this->Form->button(__('Submit'), ['url' => ['controller' => 'fichefrais', 'action' => 'display->id']]) ?>
+            <?= $this->Form->button(__('Valider'), ['url' => ['controller' => 'fichefrais', 'action' => 'display->id']]) ?>
             <?= $this->Form->end() ?>
         </div>
     </div>

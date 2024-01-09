@@ -36,7 +36,7 @@ $identity = $this->getRequest()->getAttribute('identity');
                         <?= $this->Html->link(__('Voir'), ['action' => 'view', $fichefrai->id]) ?>
                         <?php // CE QUE JAI CHANGE ATTENTION ?>
                         <?= $this->Html->link(__('Lignes de frais'), ['action' => 'display', $fichefrai->id]) ?>
-                        <?= $this->Form->postLink(__('Supprimer'), ['action' => 'delete', $fichefrai->id], ['confirm' => __('Are you sure you want to delete # {0}?', $fichefrai->id)]) ?>
+                        <?= $this->Form->postLink(__('Supprimer'), ['action' => 'delete', $fichefrai->id], ['confirm' => __('Êtes-vous sûr de vouloir supprimer # {0}?', $fichefrai->id)]) ?>
                     </td>
                 </tr>
                 <?php endforeach; ?>
@@ -45,11 +45,11 @@ $identity = $this->getRequest()->getAttribute('identity');
     </div>
     <div class="paginator">
         <ul class="pagination">
-            <?= $this->Paginator->first('<< ' . __('first')) ?>
-            <?= $this->Paginator->prev('< ' . __('précédent')) ?>
+            <?= $this->Paginator->first('<< ' . __('Premier')) ?>
+            <?= $this->Paginator->prev('< ' . __('Précédent')) ?>
             <?= $this->Paginator->numbers() ?>
-            <?= $this->Paginator->next(__('prochain') . ' >') ?>
-            <?= $this->Paginator->last(__('last') . ' >>') ?>
+            <?= $this->Paginator->next(__('Suivant') . ' >') ?>
+            <?= $this->Paginator->last(__('Dernier') . ' >>') ?>
         </ul>
         <p><?= $this->Paginator->counter(__('Page {{page}} sur {{pages}}, montrant {{current}} résultat(s) sur {{count}} résultats au total')) ?></p>
     </div>

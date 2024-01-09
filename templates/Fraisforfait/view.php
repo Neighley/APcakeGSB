@@ -9,7 +9,7 @@
         <div class="side-nav">
             <h4 class="heading"><?= __('Actions') ?></h4>
             <?= $this->Html->link(__('Edit Fraisforfait'), ['action' => 'edit', $fraisforfait->id], ['class' => 'side-nav-item']) ?>
-            <?= $this->Form->postLink(__('Delete Fraisforfait'), ['action' => 'delete', $fraisforfait->id], ['confirm' => __('Are you sure you want to delete # {0}?', $fraisforfait->id), 'class' => 'side-nav-item']) ?>
+            <?= $this->Form->postLink(__('Delete Fraisforfait'), ['action' => 'delete', $fraisforfait->id], ['confirm' => __('Êtes-vous sûr de vouloir supprimer # {0}?', $fraisforfait->id), 'class' => 'side-nav-item']) ?>
             <?= $this->Html->link(__('List Fraisforfait'), ['action' => 'index'], ['class' => 'side-nav-item']) ?>
             <?= $this->Html->link(__('New Fraisforfait'), ['action' => 'add'], ['class' => 'side-nav-item']) ?>
         </div>

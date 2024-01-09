@@ -74,11 +74,11 @@ class FichefraisController extends AppController
         if ($this->request->is('post')) {
             $fichefrai = $this->Fichefrais->patchEntity($fichefrai, $this->request->getData());
             if ($this->Fichefrais->save($fichefrai)) {
-                $this->Flash->success(__('The fichefrai has been saved.'));
+                $this->Flash->success(__('La fiche de frais a bien été ajoutée.'));
 
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('The fichefrai could not be saved. Please, try again.'));
+            $this->Flash->error(__("La fiche de frais n'a pas pu être ajoutée. Veuillez réessayer"));
         }
         $users = $this->Fichefrais->Users->find('list', ['limit' => 200])->all();
         $etats =  $this->Fichefrais->Etats->find('list', ['limit' => 200])->all();
@@ -104,11 +104,11 @@ class FichefraisController extends AppController
         if ($this->request->is(['patch', 'post', 'put'])) {
             $fichefrai = $this->Fichefrais->patchEntity($fichefrai, $this->request->getData());
             if ($this->Fichefrais->save($fichefrai)) {
-                $this->Flash->success(__('The fichefrai has been saved.'));
+                $this->Flash->success(__('La fiche de frais a bien été sauvegardée.'));
 
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('The fichefrai could not be saved. Please, try again.'));
+            $this->Flash->error(__("La fiche de frais n'a pas pu être sauvegardée. Veuillez réessayer."));
         }
         $users = $this->Fichefrais->Users->find('list', ['limit' => 200])->all();
         $lignefraisforfait = $this->Fichefrais->Lignefraisforfait->find('list', ['limit' => 200])->all();
@@ -125,11 +125,11 @@ class FichefraisController extends AppController
         if ($this->request->is(['patch', 'post', 'put'])) {
             $fichefrai = $this->Fichefrais->patchEntity($fichefrai, $this->request->getData());
             if ($this->Fichefrais->save($fichefrai)) {
-                $this->Flash->success(__('The fichefrai has been saved.'));
+                $this->Flash->success(__('La fiche de frais a bien été sauvegardée.'));
 
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('The fichefrai could not be saved. Please, try again.'));
+            $this->Flash->error(__("La fiche de frais n'a pas pu être sauvegardée. Veuillez réessayer."));
         }
         $users = $this->Fichefrais->Users->find('list', ['limit' => 200])->all();
         $lignefraisforfait = $this->Fichefrais->Lignefraisforfait->find('list', ['limit' => 200])->all();
@@ -145,11 +145,11 @@ class FichefraisController extends AppController
         if ($this->request->is(['patch', 'post', 'put'])) {
             $fichefrai = $this->Fichefrais->patchEntity($fichefrai, $this->request->getData());
             if ($this->Fichefrais->save($fichefrai)) {
-                $this->Flash->success(__('The fichefrai has been saved.'));
+                $this->Flash->success(__('La fiche de frais a bien été modifiée.'));
 
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('The fichefrai could not be saved. Please, try again.'));
+            $this->Flash->error(__("La fiche de frais n'a pas pu être modifiée. Veuillez réessayer."));
         }
         $users = $this->Fichefrais->Users->find('list', ['limit' => 200])->all();
         $lignefraisforfait = $this->Fichefrais->Lignefraisforfait->find('list', ['limit' => 200])->all();
@@ -165,11 +165,11 @@ class FichefraisController extends AppController
         if ($this->request->is(['patch', 'post', 'put'])) {
             $fichefrai = $this->Fichefrais->patchEntity($fichefrai, $this->request->getData());
             if ($this->Fichefrais->save($fichefrai)) {
-                $this->Flash->success(__('The fichefrai has been saved.'));
+                $this->Flash->success(__('La fiche de frais a bien été sauvegardée.'));
 
                 return $this->redirect(['action' => 'index']);
             }
-            $this->Flash->error(__('The fichefrai could not be saved. Please, try again.'));
+            $this->Flash->error(__("La fiche de frais n'a pas pu être sauvegardée. Veuillez réessayer."));
         }
         $users = $this->Fichefrais->Users->find('list', ['limit' => 200])->all();
         $lignefraisforfait = $this->Fichefrais->Lignefraisforfait->find('list', ['limit' => 200])->all();
@@ -189,7 +189,7 @@ class FichefraisController extends AppController
         $this->request->allowMethod(['post', 'delete']);
         $fichefrai = $this->Fichefrais->get($id);
         if ($this->Fichefrais->delete($fichefrai)) {
-            $this->Flash->success(__('La fiche de frais a été supprimée.'));
+            $this->Flash->success(__('La fiche de frais a bien été supprimée.'));
         } else {
             $this->Flash->error(__("La fiche de frais n'a pas pu être supprimée. Veuillez réessayer."));
         }
@@ -207,10 +207,10 @@ class FichefraisController extends AppController
        
 
         if ($this->Fichefrais->save($fichefrai)) {
-            $this->Flash->success(__('Fiche frais clôturée.'));
+            $this->Flash->success(__('La fiche de frais a bien été clôturée.'));
             } 
         else {
-            $this->Flash->error(__('Erreur lors de la clôture de la fiche. Peut-être que la fiche a déjà été clôturée.'));
+            $this->Flash->error(__('Erreur lors de la clôture de la fiche. Peut-être que la fiche a déjà été clôturée. Veuillez réessayer.'));
             $users = $this->Fichefrais->Users->find('list', ['limit' => 200])->all();
             $lignefraisforfait = $this->Fichefrais->Lignefraisforfait->find('list', ['limit' => 200])->all();
             $lignefraishf = $this->Fichefrais->Lignefraishf->find('list', ['limit' => 200])->all();

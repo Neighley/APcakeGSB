@@ -15,13 +15,13 @@
         <div class="fraisforfait form content">
             <?= $this->Form->create($fraisforfait) ?>
             <fieldset>
-                <legend><?= __('Add Fraisforfait') ?></legend>
+                <legend><?= __('Ajouter Frais forfait') ?></legend>
                 <?php
                     echo $this->Form->control('montant');
                     echo $this->Form->control('label');
                 ?>
             </fieldset>
-            <?= $this->Form->button(__('Submit')) ?>
+            <?= $this->Form->button(__('Valider')) ?>
             <?= $this->Form->end() ?>
         </div>
     </div>
