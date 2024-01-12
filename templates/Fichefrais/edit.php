@@ -23,13 +23,13 @@
         <div class="fichefrais form content">
             <?= $this->Form->create($fichefrai) ?>
             <fieldset>
-                <legend><?= __('Edit Fichefrai') ?></legend>
+                <legend><?= __('Editer Fiche de frais') ?></legend>
                 <?php
-                    echo $this->Form->control('annee');
-                    echo $this->Form->control('mois');
-                    echo $this->Form->control('montantvalide');
-                    echo $this->Form->control('user_id', ['options' => $users]);
-                    echo $this->Form->control('etat_id');
+                    echo $this->Form->control('annee', ['label'=>__('annee')]);
+                    echo $this->Form->control('mois', ['label'=>__('mois')]);
+                    echo $this->Form->control('montantvalide', ['label'=>__('montantvalide')]);
+                    echo $this->Form->control('user_id', ['options' => $users], ['label'=>__('user')]);
+                    echo $this->Form->control('etat_id', ['label'=>__('etat')]);
                     echo $this->Form->control('lignefraisforfait._ids', ['options' => $lignefraisforfait]);
                     echo $this->Form->control('lignefraishf._ids', ['options' => $lignefraishf]);
                 ?>

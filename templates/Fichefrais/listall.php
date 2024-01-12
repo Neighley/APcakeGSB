@@ -31,24 +31,7 @@ $identity = $this->getRequest()->getAttribute('identity');
                     <td><?= $this->Number->format($fichefrai->mois) ?></td>
                     <td><?= $this->Number->format($fichefrai->montantvalide) ?></td>
                     <!--<td><?= $fichefrai->has('user') ? $this->Html->link($fichefrai->user->id, ['controller' => 'Users', 'action' => 'view', $fichefrai->user->id]) : '' ?></td>-->
-                    <td><?= $fichefrai->has('etat_id') ? $this->Html->link($fichefrai->etat_id,['controller'=> 'Etats','actions'=> 'view',$fichefrai->etat_id]) : '' ?>
-                    <?php /*if($fichefrai->etat_id == 1){
-                        echo "- créée";
-                    }
-                    if($fichefrai->etat_id == 2){
-                        echo "- clôturée";
-                    }
-                    if($fichefrai->etat_id == 3){
-                        echo "- validée";
-                    }
-                    if($fichefrai->etat_id == 4){
-                        echo "- mise en paiement";
-                    }
-                    if($fichefrai->etat_id == 5){
-                        echo "- remboursée";
-                    }*/
-                    echo " - ".$fichefrai->etat->etat;
-                    ?>
+                    <td><?php if ($fichefrai->has('etat_id')) {echo __($fichefrai->etat->etat);}?>
                     </td>
                     <td class="actions">
                         <?= $this->Html->link(__('Voir'), ['action' => 'view', $fichefrai->id]) ?>

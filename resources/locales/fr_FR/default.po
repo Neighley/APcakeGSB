@@ -1,0 +1,32 @@
+msgid "annee"
+msgstr "Année"
+
+msgid "user"
+msgstr "Utilisateur"
+
+msgid "montantvalide"
+msgstr "Montant validé"
+
+msgid "etat"
+msgstr "État"
+
+msgid "Delete"
+msgstr "Supprimer"
+
+msgid "créée"
+msgstr "Créée"
+
+msgid "clôturée"
+msgstr "Clôturée"
+
+msgid "validée"
+msgstr "Validée"
+
+msgid "mise en paiement"
+msgstr "Mise en paiement"
+
+msgid "remboursée"
+msgstr "Remboursée"
+
+msgid "mois"
+msgstr "test"
