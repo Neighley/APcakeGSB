@@ -16,7 +16,6 @@
                 ['action' => 'Supprimer', $fichefrai->id],
                 ['confirm' => __('Êtes-vous sûr de vouloir supprimer # {0}?', $fichefrai->id), 'class' => 'side-nav-item']
             ) ?>
-            <?= $this->Html->link(__('Liste des fiches de frais'), ['action' => 'index'], ['class' => 'side-nav-item']) ?>
         </div>
     </aside>
     <div class="column-responsive column-80">

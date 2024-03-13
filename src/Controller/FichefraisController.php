@@ -2,13 +2,13 @@
 declare(strict_types=1);
 
 namespace App\Controller;
-
 /**
  * Fichefrais Controller
  *
  * @property \App\Model\Table\FichefraisTable $Fichefrais
  * @method \App\Model\Entity\Fichefrai[]|\Cake\Datasource\ResultSetInterface paginate($object = null, array $settings = [])
  */
+
 class FichefraisController extends AppController
 {
     /**
@@ -70,20 +70,26 @@ class FichefraisController extends AppController
      */
     public function add()
     {
-        $fichefrai = $this->Fichefrais->newEmptyEntity();
+        $identity = $this->getRequest()->getAttribute('identity');
+        $fichefrai = $this->Fichefrais->newEntity(['montantvalide' => 0]);
         if ($this->request->is('post')) {
             $fichefrai = $this->Fichefrais->patchEntity($fichefrai, $this->request->getData());
+            $fichefrai['etat_id'] = 1;
+            $fichefrai['user_id'] = $identity['id'];
             if ($this->Fichefrais->save($fichefrai)) {
                 $this->Flash->success(__('La fiche de frais a bien été ajoutée.'));
 
-                return $this->redirect(['action' => 'index']);
+                if($identity['role_id'] == "visiteur") {
+                    return $this->redirect(['action' => 'list']);
+                }
+                if($identity['role_id'] == "superuser") {
+                    return $this->redirect(['action' => 'listall']);
+                }
             }
             $this->Flash->error(__("La fiche de frais n'a pas pu être ajoutée. Veuillez réessayer"));
         }
         $users = $this->Fichefrais->Users->find('list', ['limit' => 200])->all();
         $etats =  $this->Fichefrais->Etats->find('list', ['limit' => 200])->all();
-      
-       
         $lignefraisforfait = $this->Fichefrais->Lignefraisforfait->find('list', ['limit' => 200])->all();
         $lignefraishf = $this->Fichefrais->Lignefraishf->find('list', ['limit' => 200])->all();
         $this->set(compact('fichefrai', 'users','etats', 'lignefraisforfait', 'lignefraishf'));
@@ -202,7 +208,6 @@ class FichefraisController extends AppController
         $fichefrai = $this->Fichefrais->get($id, [
             'contain' => ['Lignefraisforfait', 'Lignefraishf','Lignefraisforfait.Fraisforfait'],
         ]);
-       // debug($fichefrai);
         $fichefrai->etat_id = 2;
        
 
@@ -215,7 +220,6 @@ class FichefraisController extends AppController
             $lignefraisforfait = $this->Fichefrais->Lignefraisforfait->find('list', ['limit' => 200])->all();
             $lignefraishf = $this->Fichefrais->Lignefraishf->find('list', ['limit' => 200])->all();
             $this->set(compact('fichefrai', 'users', 'lignefraisforfait', 'lignefraishf'));
-          //  debug($fichefrai);
             return $this->render("displayetat");
             }
 

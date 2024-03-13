@@ -3,24 +3,30 @@
  * @var \App\View\AppView $this
  * @var \App\Model\Entity\Fichefrai $fichefrai
  */
+
+$identity = $this->getRequest()->getAttribute('identity');
 ?>
 <div class="row">
     <aside class="column">
         <div class="side-nav">
             <h4 class="heading"><?= __('Actions') ?></h4>
-            <?= $this->Html->link(__('Editer'), ['action' => 'edit', $fichefrai->id], ['class' => 'side-nav-item']) ?>
-            <?= $this->Form->postLink(__('Supprimer'), ['action' => 'delete', $fichefrai->id], ['confirm' => __('Êtes-vous sûr de vouloir supprimer # {0}?', $fichefrai->id), 'class' => 'side-nav-item']) ?>
-            <?= $this->Html->link(__('Liste des Fiche de frais'), ['action' => 'index'], ['class' => 'side-nav-item']) ?>
-            <?= $this->Html->link(__('Nouvelle Fiche de frais'), ['action' => 'add'], ['class' => 'side-nav-item']) ?>
+            <?php if($identity['role_id'] == "superuser" || $identity['role_id'] == "visiteur"){
+                echo $this->Html->link(__('Nouvelle Fiche de frais'), ['action' => 'add'], ['class' => 'side-nav-item']); } ?>
+            <?php if($identity['role_id'] == "superuser" || $identity['role_id'] == "comptable"){
+                echo $this->Html->link(__("Gérer l'état"), ['action' => 'displayetat', $fichefrai->id], ['class' => 'side-nav-item']);
+            };
+            ?>
         </div>
     </aside>
     <div class="column-responsive column-80">
         <div class="fichefrais view content">
-            <h3><?= h($fichefrai->id) ?></h3>
+            <h3><?php echo "Fiche numéro : " . h($fichefrai->id) ?></h3>
             <table>
                 <tr>
-                    <th><?= __('User') ?></th>
-                    <td><?= $fichefrai->has('user') ? $this->Html->link($fichefrai->user->id, ['controller' => 'Users', 'action' => 'view', $fichefrai->user->id]) : '' ?></td>
+                    <?php if($identity['role_id'] == "superuser") { ?>
+                        <th><?= __('User') ?></th>
+                        <td><?= $fichefrai->has('user') ? $this->Html->link($fichefrai->user->id, ['controller' => 'Users', 'action' => 'view', $fichefrai->user->id]) : '' ?></td>
+                    <?php } ?>
                 </tr>
                 <tr>
                     <th><?= __('Id') ?></th>

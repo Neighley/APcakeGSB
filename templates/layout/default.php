@@ -47,7 +47,7 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
             <?php
             if(!empty($identity['role_id'])){
                 if($identity['role_id'] == "visiteur") { ?>
-                <a target="_self" rel="noopener" href="http://localhost:8765/fichefrais/list">Ma Fiche de Frais</a>
+                <a target="_self" rel="noopener" href="http://localhost:8765/fichefrais/list">Mes Fiche de Frais</a>
                 <?php } 
                 elseif($identity['role_id'] == "superuser" || $identity['role_id'] == "comptable") { ?>
                 <a target="_self" rel="noopener" href="http://localhost:8765/fichefrais/listall">Les Fiches de Frais</a>

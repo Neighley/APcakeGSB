@@ -6,25 +6,33 @@
  * @var \Cake\Collection\CollectionInterface|string[] $lignefraisforfait
  * @var \Cake\Collection\CollectionInterface|string[] $lignefraishf
  */
+$identity = $this->getRequest()->getAttribute('identity');
 ?>
 <div class="row">
-    <aside class="column">
-        <div class="side-nav">
-            <h4 class="heading"><?= __('Actions') ?></h4>
-            <?= $this->Html->link(__('Liste fiches de frais'), ['action' => 'index'], ['class' => 'side-nav-item']) ?>
-        </div>
-    </aside>
     <div class="column-responsive column-80">
         <div class="fichefrais form content">
             <?= $this->Form->create($fichefrai) ?>
             <fieldset>
                 <legend><?= __('Créer une nouvelle fiche de frais') ?></legend>
                 <?php
-                    echo $this->Form->control('Année');
-                    echo $this->Form->control('mois');
-                    echo $this->Form->control('Montant validé');
-                    echo $this->Form->control('Utilisateur', ['options' => $users]);
-                    echo $this->Form->control('Etat de la fiche', ['options' => $etats]);
+                    echo $this->Form->control('annee', ['label'=>__('Année')]);
+                    echo $this->Form->control('mois', ['label'=>__('Mois')]);
+                    echo $this->Form->control('montantvalide', ['label'=>__('Montant'), 'readonly' => true]);
+                    if($identity['role_id'] == "visiteur"){
+                    echo 'Utilisateur actuel : ';
+                    echo $identity['username'];
+                    }
+                    if($identity['role_id'] == "superuser" || $identity['role_id'] == "comptable"){
+                        echo $this->Form->control('Utilisateur', ['options' => $users]);
+                    }
+                    if($identity['role_id'] == "superuser"){
+                        echo $this->Form->control('Etat de la fiche', ['options' => $etats]);
+                        echo "Les lignes forfaitaires et non forfaitaires seront ajoutables à cette fiche dans l'option 'Gérer l'état' ";
+                    } 
+                    echo "<br><br>";
+                    if($identity['role_id'] == "visiteur"){
+                        echo "Les lignes forfaitaires et non forfaitaires seront ajoutables à cette fiche dans l'option 'Gérer l'état' ";
+                    }
                     //echo $this->Form->control('lignefraisforfait._ids', ['options' => $lignefraisforfait]);
                     //echo $this->Form->control('lignefraishf._ids', ['options' => $lignefraishf]);
                 ?>

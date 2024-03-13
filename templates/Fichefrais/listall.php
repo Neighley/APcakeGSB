@@ -8,8 +8,9 @@ $identity = $this->getRequest()->getAttribute('identity');
 
 ?>
 <div class="fichefrais index content">
-    <?= $this->Html->link(__('Nouveau +'), ['action' => 'add'], ['class' => 'button float-right']) ?>
-    <h3><?= __('Toutes les Fiches de frais des utilisateurs :'); ?></h3>
+    <?php if($identity['role_id'] == "superuser" || $identity['role_id'] == "visiteur"){
+        echo $this->Html->link(__('Nouveau +'), ['action' => 'add'], ['class' => 'button float-right']);
+    }?>    <h3><?= __('Toutes les Fiches de frais des utilisateurs :'); ?></h3>
     <div class="table-responsive">
         <table>
             <thead>

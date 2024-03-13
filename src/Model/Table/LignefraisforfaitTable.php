@@ -71,7 +71,8 @@ class LignefraisforfaitTable extends Table
         $validator
             ->integer('fraisforfait_id')
             ->notEmptyString('fraisforfait_id')
-            ->add('fraisforfait_id', 'unique', ['rule' => 'validateUnique', 'provider' => 'table']);
+            //->add('fraisforfait_id', 'unique', ['rule' => 'validateUnique', 'provider' => 'table'])
+            ;
 
         return $validator;
     }

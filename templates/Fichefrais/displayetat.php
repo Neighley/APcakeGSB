@@ -6,26 +6,18 @@
  * @var string[]|\Cake\Collection\CollectionInterface $lignefraisforfait
  * @var string[]|\Cake\Collection\CollectionInterface $lignefraishf
  */
+$identity = $this->getRequest()->getAttribute('identity');
+
 ?>
 <div class="row">
-    <aside class="column">
-        <div class="side-nav">
-            <h4 class="heading"><?= __('Actions') ?></h4>
-            <?= $this->Form->postLink(
-                __('Delete'),
-                ['action' => 'Supprimer', $fichefrai->id],
-                ['confirm' => __('Êtes-vous sûr de vouloir supprimer # {0}?', $fichefrai->id), 'class' => 'side-nav-item']
-            ) ?>
-            <?= $this->Html->link(__('Liste des fiches de frais'), ['action' => 'index'], ['class' => 'side-nav-item']) ?>
-        </div>
-    </aside>
     <div class="column-responsive column-80">
         <div class="fichefrais form content">
             <?= $this->Form->create($fichefrai) ?>
             <fieldset>
                 <legend><?= __('Lignes frais forfait') ?></legend>
+                <?php if($identity['role_id'] == "superuser" || $identity['role_id'] == "visiteur"){ ?>
                 <a href = "http://localhost:8765/lignefraisforfait/create/<?php echo $fichefrai->id ?> " class = "button float-right">Ajouter une ligne</a>
-
+                <?php } ?>
                 <table>
                     <thead>
                         <tr>
@@ -33,7 +25,9 @@
                             <th>Label</th>
                             <th>Montant</th>
                             <th>Quantité</th>
-                            <th>Actions</th>
+                            <?php if($identity['role_id'] == "superuser" || $identity['role_id'] == "visiteur"){ ?>
+                                <th>Actions</th>
+                            <?php } ?>
                         </tr>
                     </thead>
             <?php
@@ -43,10 +37,12 @@
                                 <td><?= ($lignefraisforfait->fraisforfait->label) ?></td>
                                 <td><?= ($lignefraisforfait->fraisforfait->montant) ?></td>
                                 <td><?= $this->Number->format($lignefraisforfait->quantite) ?></td>
-                                <td class="actions">
-                                    <a href = "http://localhost:8765/lignefraisforfait/modify/<?php echo $lignefraisforfait->id ?>">Modifier</a>
-                                    <?= $this->Form->postLink(__('Supprimer'), ['action' => 'delete', $lignefraisforfait->id], ['confirm' => __('Êtes-vous sûr de vouloir supprimer # {0}?', $lignefraisforfait->id)]) ?>
-                                </td>
+                                <?php if($identity['role_id'] == "superuser" || $identity['role_id'] == "visiteur"){ ?>
+                                    <td class="actions">
+                                        <a href = "http://localhost:8765/lignefraisforfait/modify/<?php echo $lignefraisforfait->id ?>">Modifier</a>
+                                        <?= $this->Form->postLink(__('Supprimer'), ['action' => 'delete', $lignefraisforfait->id], ['confirm' => __('Êtes-vous sûr de vouloir supprimer # {0}?', $lignefraisforfait->id)]) ?>
+                                    </td>
+                                <?php } ?>
                             </tr>
                     <?php endforeach; ?>
                     </table>
@@ -63,8 +59,9 @@
                     <br><br>
 
                     <legend><?= __('Lignes frais hors forfait') ?></legend>
+                    <?php if($identity['role_id'] == "superuser" || $identity['role_id'] == "visiteur"){ ?>
                     <a href = "http://localhost:8765/lignefraishf/create/<?php echo $fichefrai->id ?> " class = "button float-right">Ajouter une ligne</a>
-
+                    <?php } ?>
                     <table>
                         <thead>
                         <tr>

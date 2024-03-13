@@ -100,7 +100,7 @@ return [
         [
             'prefix' => false,
             'controller' => 'Fichefrais',
-            'role_id' => 'admin', 'comptable',
+            'role_id' => ['admin', 'comptable'],
             'action' => [
                 'validateFiche',
                 'closeFiche',
@@ -108,14 +108,15 @@ return [
         ],
         [
             'prefix' => false,
-            'controller' => 'Fichefrais',
-            'role_id' => 'visiteur',
+            'controller' => '*',
+            'role_id' => ['visiteur', 'user'],
             'action' => [
                 'list',
                 'display',
                 'add',
                 'view',
                 'create',
+                'delete',
             ],            
         ],
         //admin role allowed to all the things
@@ -160,6 +161,10 @@ return [
             'controller' => '*',
             'action' => '*',
             'bypassAuth' => true,
+
+            'role' => '*',
+            'controller' => '*',
+            'action' => '*',
         ],
     ]
 ];

@@ -72,10 +72,11 @@ class LignefraisforfaitController extends AppController
             if ($this->Lignefraisforfait->save($lignefraisforfait)) {
                 $this->Flash->success(__('La ligne de frais forfait a bien été créée.'));
 
-                return $this->redirect(['action' => 'index']);
+                return $this->redirect(['action' => 'display']);
             }
             $this->Flash->error(__("La ligne de frais forfait n'a pas pu être créée. Veuillez réessayer."));
         }
+        debug($lignefraisforfait);
         $fraisforfait = $this->Lignefraisforfait->Fraisforfait->find('list', ['limit' => 200])->all();
         $fichefrais = $this->Lignefraisforfait->Fichefrais->find('list', ['limit' => 200])->all();
         $this->set(compact('lignefraisforfait', 'fraisforfait', 'fichefrais'));
