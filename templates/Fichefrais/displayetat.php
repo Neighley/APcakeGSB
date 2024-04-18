@@ -19,11 +19,12 @@ $identity = $this->getRequest()->getAttribute('identity');
             <?php if($identity['role_id'] == "superuser" || $identity['role_id'] == "comptable"){
                 echo $this->Html->link(__('◂ Retour'), ['action' => 'listall'], ['class' => 'side-nav-item']); } ?> 
 
-            <?= $this->Form->postLink(
+            <?php if($identity['role_id'] == "superuser") {
+                echo $this->Form->postLink(
                 __('Delete'),
                 ['action' => 'Supprimer', $fichefrai->id],
                 ['confirm' => __('Êtes-vous sûr de vouloir supprimer # {0}?', $fichefrai->id), 'class' => 'side-nav-item']
-            ) ?>
+                ); } ?>
         </div>
     </aside>
     <div class="column-responsive column-80">
@@ -82,21 +83,16 @@ $identity = $this->getRequest()->getAttribute('identity');
                         <thead>
                         <tr>
                             <th>ID</th>
-                            <th>Label</th>
                             <th>Montant</th>
-                            <th>Action</th>
+                            <th>Label</th>
                         </tr>
                         </thead>
 
                         <?php foreach ($fichefrai->lignefraishf as $lignefraishf): ?>
                         <tr>
                             <td><?= $this->Number->format($lignefraishf->id) ?></td>
-                            <td><?= ($lignefraishf->label) ?></td>
                             <td><?= $this->Number->format($lignefraishf->montant) ?></td>
-                            <td class="actions">
-                                    <?= $this->Html->link(__('Modifier'), ['controller' => 'lignefraishf', 'action' => 'modify', $lignefraishf->id]) ?>
-                                    <?php echo $this->Form->postLink(__('Supprimer'), ['controller' => 'lignefraishf', 'action' => 'delete', $lignefraishf->id], ['confirm' => __('Êtes-vous sûr de vouloir supprimer # {0}?', $lignefraishf->id)]) ?>
-                            </td>
+                            <td><?= ($lignefraishf->label) ?></td>
                         </tr>
                         <?php endforeach; ?>
                     </table>
