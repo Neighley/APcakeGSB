@@ -6,16 +6,21 @@
 
 $identity = $this->getRequest()->getAttribute('identity');
 ?>
+
 <div class="row">
     <aside class="column">
         <div class="side-nav">
             <h4 class="heading"><?= __('Actions') ?></h4>
             <?php if($identity['role_id'] == "superuser" || $identity['role_id'] == "visiteur"){
                 echo $this->Html->link(__('Nouvelle Fiche de frais'), ['action' => 'add'], ['class' => 'side-nav-item']); } ?>
+            
             <?php if($identity['role_id'] == "superuser" || $identity['role_id'] == "comptable"){
                 echo $this->Html->link(__("Gérer l'état"), ['action' => 'displayetat', $fichefrai->id], ['class' => 'side-nav-item']);
-            };
-            ?>
+                echo $this->Html->link(__('◂ Retour'), ['action' => 'listall'], ['class' => 'side-nav-item']); } ?> 
+
+            <?php if($identity['role_id'] == "visiteur") {
+                echo $this->Html->link(__('◂ Retour'), ['action' => 'list'], ['class' => 'side-nav-item']); } ?> 
+            
         </div>
     </aside>
     <div class="column-responsive column-80">
@@ -59,20 +64,14 @@ $identity = $this->getRequest()->getAttribute('identity');
                             <th><?= __('Label') ?></th>
                             <th><?= __('Quantite', 'Quantité') ?></th>
                             <th><?= __('Fraisforfait Id', 'ID des frais forfait') ?></th>
-                            <th class="actions"><?= __('Actions') ?></th>
                         </tr>
                         <?php foreach ($fichefrai->lignefraisforfait as $lignefraisforfait) : ?>
-                        <tr>
-                            <td><?= h($lignefraisforfait->id) ?></td>
-                            <td><?= h($lignefraisforfait->label) ?></td>
-                            <td><?= h($lignefraisforfait->quantite) ?></td>
-                            <td><?= h($lignefraisforfait->fraisforfait_id) ?></td>
-                            <td class="actions">
-                                <?= $this->Html->link(__('Voir'), ['controller' => 'Lignefraisforfait', 'action' => 'view', $lignefraisforfait->id]) ?>
-                                <?= $this->Html->link(__('Modifier'), ['controller' => 'Lignefraisforfait', 'action' => 'edit', $lignefraisforfait->id]) ?>
-                                <?= $this->Form->postLink(__('Supprimer'), ['controller' => 'Lignefraisforfait', 'action' => 'delete', $lignefraisforfait->id], ['confirm' => __('Êtes-vous sûr de vouloir supprimer # {0}?', $lignefraisforfait->id)]) ?>
-                            </td>
-                        </tr>
+                            <tr>
+                                <td><?= h($lignefraisforfait->id) ?></td>
+                                <td><?= ($lignefraisforfait->fraisforfait) ?></td>
+                                <td><?= h($lignefraisforfait->quantite) ?></td>
+                                <td><?= h($lignefraisforfait->fraisforfait_id) ?></td>
+                            </tr>
                         <?php endforeach; ?>
                     </table>
                 </div>
@@ -85,20 +84,14 @@ $identity = $this->getRequest()->getAttribute('identity');
                     <table>
                         <tr>
                             <th><?= __('Id') ?></th>
-                            <th><?= __('Montant') ?></th>
                             <th><?= __('Label') ?></th>
-                            <th class="actions"><?= __('Actions') ?></th>
+                            <th><?= __('Montant') ?></th>
                         </tr>
                         <?php foreach ($fichefrai->lignefraishf as $lignefraishf) : ?>
                         <tr>
                             <td><?= h($lignefraishf->id) ?></td>
-                            <td><?= h($lignefraishf->montant) ?></td>
                             <td><?= h($lignefraishf->label) ?></td>
-                            <td class="actions">
-                                <?= $this->Html->link(__('Voir'), ['controller' => 'Lignefraishf', 'action' => 'view', $lignefraishf->id]) ?>
-                                <?= $this->Html->link(__('Modifier'), ['controller' => 'Lignefraishf', 'action' => 'edit', $lignefraishf->id]) ?>
-                                <?= $this->Form->postLink(__('Supprimer'), ['controller' => 'Lignefraishf', 'action' => 'delete', $lignefraishf->id], ['confirm' => __('Êtes-vous sûr de vouloir supprimer # {0}?', $lignefraishf->id)]) ?>
-                            </td>
+                            <td><?= h($lignefraishf->montant) ?></td>
                         </tr>
                         <?php endforeach; ?>
                     </table>

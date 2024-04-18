@@ -36,8 +36,13 @@ $identity = $this->getRequest()->getAttribute('identity');
                     </td>
                     <td class="actions">
                         <?= $this->Html->link(__('Voir'), ['action' => 'view', $fichefrai->id]) ?>
+                        <?php if($identity['role_id'] == 'superuser') {
+                            echo $this->Html->link(__("Modifier"), ['action' => 'edit', $fichefrai->id]);
+                            echo $this->Form->postLink(__('Supprimer'), ['action' => 'delete', $fichefrai->id], ['confirm' => __('Êtes-vous sûr de vouloir supprimer # {0}?', $fichefrai->id)]);
+                        } ?>
                         <?php // CE QUE JAI CHANGE ATTENTION ?>
                         <?= $this->Html->link(__("Gérer l'état"), ['action' => 'displayetat', $fichefrai->id]) ?>
+
                     </td>
                 </tr>
                 <?php endforeach; ?>

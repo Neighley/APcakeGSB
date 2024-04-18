@@ -40,6 +40,7 @@ $identity = $this->getRequest()->getAttribute('identity');
                     </td>
                 </tr>
                 <?php endforeach; ?>
+
             </tbody>
         </table>
     </div>

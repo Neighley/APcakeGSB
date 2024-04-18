@@ -233,7 +233,7 @@ return [
              * The keys host, port, timeout, username, password, client and tls
              * are used in SMTP transports
              */
-            'host' => 'localhost',
+            'host' => 'Debug',
             'port' => 25,
             'timeout' => 30,
             /*

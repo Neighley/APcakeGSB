@@ -7,17 +7,6 @@
  */
 ?>
 <div class="row">
-    <aside class="column">
-        <div class="side-nav">
-            <h4 class="heading"><?= __('Actions') ?></h4>
-            <?= $this->Form->postLink(
-                __('Delete'),
-                ['action' => 'delete', $lignefraisforfait->id],
-                ['confirm' => __('Êtes-vous sûr de vouloir supprimer # {0}?', $lignefraisforfait->id), 'class' => 'side-nav-item']
-            ) ?>
-            <?= $this->Html->link(__('List Lignefraisforfait'), ['action' => 'index'], ['class' => 'side-nav-item']) ?>
-        </div>
-    </aside>
     <div class="column-responsive column-80">
         <div class="lignefraisforfait form content">
             <?= $this->Form->create($lignefraisforfait) ?>

@@ -14,7 +14,7 @@
                 <?php
                     echo $this->Form->control('montant');
                     echo $this->Form->control('label');
-                    echo $this->Form->control('fichefrais._ids', ['options' => $fichefrais]);
+                    echo $this->Form->input('fichefrais._ids', ['options' => $fichefrais, 'value' => $id, 'type' => 'hidden', 'name' => 'fichefrais[_ids][]']);
                 ?>
             </fieldset>
             <?= $this->Form->button(__('Valider')) ?>

@@ -10,13 +10,29 @@ $identity = $this->getRequest()->getAttribute('identity');
 
 ?>
 <div class="row">
+    <aside class="column">
+        <div class="side-nav">
+            <h4 class="heading"><?= __('Actions') ?></h4>
+            <?php if($identity['role_id'] == "visiteur") {
+                echo $this->Html->link(__('◂ Retour'), ['action' => 'list'], ['class' => 'side-nav-item']); } ?> 
+            
+            <?php if($identity['role_id'] == "superuser" || $identity['role_id'] == "comptable"){
+                echo $this->Html->link(__('◂ Retour'), ['action' => 'listall'], ['class' => 'side-nav-item']); } ?> 
+
+            <?= $this->Form->postLink(
+                __('Delete'),
+                ['action' => 'Supprimer', $fichefrai->id],
+                ['confirm' => __('Êtes-vous sûr de vouloir supprimer # {0}?', $fichefrai->id), 'class' => 'side-nav-item']
+            ) ?>
+        </div>
+    </aside>
     <div class="column-responsive column-80">
         <div class="fichefrais form content">
             <?= $this->Form->create($fichefrai) ?>
             <fieldset>
                 <legend><?= __('Lignes frais forfait') ?></legend>
                 <?php if($identity['role_id'] == "superuser" || $identity['role_id'] == "visiteur"){ ?>
-                <a href = "http://localhost:8765/lignefraisforfait/create/<?php echo $fichefrai->id ?> " class = "button float-right">Ajouter une ligne</a>
+                <?= $this->Html->link(__('Ajouter une ligne'), ['controller' => 'lignefraisforfait', 'action' => 'create', $fichefrai->id], ['class' => 'button float-right']) ?>
                 <?php } ?>
                 <table>
                     <thead>
@@ -39,8 +55,8 @@ $identity = $this->getRequest()->getAttribute('identity');
                                 <td><?= $this->Number->format($lignefraisforfait->quantite) ?></td>
                                 <?php if($identity['role_id'] == "superuser" || $identity['role_id'] == "visiteur"){ ?>
                                     <td class="actions">
-                                        <a href = "http://localhost:8765/lignefraisforfait/modify/<?php echo $lignefraisforfait->id ?>">Modifier</a>
-                                        <?= $this->Form->postLink(__('Supprimer'), ['action' => 'delete', $lignefraisforfait->id], ['confirm' => __('Êtes-vous sûr de vouloir supprimer # {0}?', $lignefraisforfait->id)]) ?>
+                                        <?= $this->Html->link(__('Modifier'), ['controller' => 'lignefraisforfait', 'action' => 'modify', $lignefraisforfait->id]) ?>
+                                        <?= $this->Form->postLink(__('Supprimer'), ['controller' => 'lignefraisforfait', 'action' => 'delete', $lignefraisforfait->id, $fichefrai->id], ['confirm' => __('Êtes-vous sûr de vouloir supprimer # {0}?', $lignefraisforfait->id)]) ?>
                                     </td>
                                 <?php } ?>
                             </tr>
@@ -60,7 +76,7 @@ $identity = $this->getRequest()->getAttribute('identity');
 
                     <legend><?= __('Lignes frais hors forfait') ?></legend>
                     <?php if($identity['role_id'] == "superuser" || $identity['role_id'] == "visiteur"){ ?>
-                    <a href = "http://localhost:8765/lignefraishf/create/<?php echo $fichefrai->id ?> " class = "button float-right">Ajouter une ligne</a>
+                    <?= $this->Html->link(__('Ajouter une ligne'), ['controller' => 'lignefraishf', 'action' => 'create', $fichefrai->id], ['class' => 'button float-right']) ?>
                     <?php } ?>
                     <table>
                         <thead>
@@ -78,8 +94,8 @@ $identity = $this->getRequest()->getAttribute('identity');
                             <td><?= ($lignefraishf->label) ?></td>
                             <td><?= $this->Number->format($lignefraishf->montant) ?></td>
                             <td class="actions">
-                                    <a href = "http://localhost:8765/lignefraishf/modify/<?php echo $lignefraishf->id ?>">Modifier</a>
-                                    <?= $this->Form->postLink(__('Delete'), ['action' => 'Supprimer', $lignefraishf->id], ['confirm' => __('Êtes-vous sûr de vouloir supprimer # {0}?', $lignefraisforfait->id)]) ?>
+                                    <?= $this->Html->link(__('Modifier'), ['controller' => 'lignefraishf', 'action' => 'modify', $lignefraishf->id]) ?>
+                                    <?php echo $this->Form->postLink(__('Supprimer'), ['controller' => 'lignefraishf', 'action' => 'delete', $lignefraishf->id], ['confirm' => __('Êtes-vous sûr de vouloir supprimer # {0}?', $lignefraishf->id)]) ?>
                             </td>
                         </tr>
                         <?php endforeach; ?>

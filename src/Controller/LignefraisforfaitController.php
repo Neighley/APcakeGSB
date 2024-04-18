@@ -55,7 +55,7 @@ class LignefraisforfaitController extends AppController
             if ($this->Lignefraisforfait->save($lignefraisforfait)) {
                 $this->Flash->success(__('La ligne de frais forfait a bien été ajoutée.'));
 
-                return $this->redirect(['action' => 'index']);
+                return $this->redirect(['controller' => 'fichefrais', 'action' => 'listall']);
             }
             $this->Flash->error(__("La ligne de frais forfait n'a pas pu être ajoutée. Veuillez réessayer."));
         }
@@ -64,22 +64,28 @@ class LignefraisforfaitController extends AppController
         $this->set(compact('lignefraisforfait', 'fraisforfait', 'fichefrais'));
     }
 
-    public function create()
+    public function create($id = null)
     {
+        $identity = $this->getRequest()->getAttribute('identity');
         $lignefraisforfait = $this->Lignefraisforfait->newEmptyEntity();
         if ($this->request->is('post')) {
             $lignefraisforfait = $this->Lignefraisforfait->patchEntity($lignefraisforfait, $this->request->getData());
             if ($this->Lignefraisforfait->save($lignefraisforfait)) {
                 $this->Flash->success(__('La ligne de frais forfait a bien été créée.'));
+                $this->calculmontant($id);
 
-                return $this->redirect(['action' => 'display']);
+                if($identity['role_id'] == 'superuser' || $identity['role_id'] == 'comptable') {
+                    return $this->redirect(['controller'=>'fichefrais','action' => 'displayetat',$id]);
+                }
+                else {
+                    return $this->redirect(['controller'=>'fichefrais','action' => 'display',$id]);
+                }
             }
             $this->Flash->error(__("La ligne de frais forfait n'a pas pu être créée. Veuillez réessayer."));
         }
-        debug($lignefraisforfait);
         $fraisforfait = $this->Lignefraisforfait->Fraisforfait->find('list', ['limit' => 200])->all();
         $fichefrais = $this->Lignefraisforfait->Fichefrais->find('list', ['limit' => 200])->all();
-        $this->set(compact('lignefraisforfait', 'fraisforfait', 'fichefrais'));
+        $this->set(compact('lignefraisforfait', 'fraisforfait', 'fichefrais', 'id'));
     }
 
     /**
@@ -99,7 +105,7 @@ class LignefraisforfaitController extends AppController
             if ($this->Lignefraisforfait->save($lignefraisforfait)) {
                 $this->Flash->success(__('La ligne de frais forfait a bien été modifiée.'));
 
-                return $this->redirect(['action' => 'index']);
+                return $this->redirect(['controller' => 'fichefrais', 'action' => 'listall']);
             }
             $this->Flash->error(__("La ligne de frais forfait n'a pas pu être modifiée. Veuillez réessayer."));
         }
@@ -109,7 +115,7 @@ class LignefraisforfaitController extends AppController
     }
 
     public function modify($id = null)
-    {
+    {   $identity = $this->getRequest()->getAttribute('identity');
         $lignefraisforfait = $this->Lignefraisforfait->get($id, [
             'contain' => ['Fichefrais'],
         ]);
@@ -118,7 +124,13 @@ class LignefraisforfaitController extends AppController
             if ($this->Lignefraisforfait->save($lignefraisforfait)) {
                 $this->Flash->success(__('La ligne frais forfait a bien été modifiée.'));
                 $idfiche = $lignefraisforfait->fichefrais[0]->id;
-                return $this->redirect(['controller' => 'fichefrais', 'action' => 'display', $idfiche]);
+
+                if($identity['role_id'] == 'superuser' || $identity['role_id'] == 'comptable') {
+                    return $this->redirect(['controller' => 'fichefrais', 'action' => 'displayall', $idfiche]);
+                }
+                else {
+                    return $this->redirect(['controller' => 'fichefrais', 'action' => 'display', $idfiche]);
+                }
             }
             $this->Flash->error(__("La ligne de frais forfait n'a pas pu être modifiée. Veuillez réessayer."));
         }
@@ -134,8 +146,9 @@ class LignefraisforfaitController extends AppController
      * @return \Cake\Http\Response|null|void Redirects to index.
      * @throws \Cake\Datasource\Exception\RecordNotFoundException When record not found.
      */
-    public function delete($id = null)
+    public function delete($id = null, $idfiche = null)
     {
+        $identity = $this->getRequest()->getAttribute('identity');
         $this->request->allowMethod(['post', 'delete']);
         $lignefraisforfait = $this->Lignefraisforfait->get($id);
         if ($this->Lignefraisforfait->delete($lignefraisforfait)) {
@@ -144,6 +157,58 @@ class LignefraisforfaitController extends AppController
             $this->Flash->error(__("La ligne de frais forfait n'a pas pu être supprimée. Veuillez réessayer."));
         }
 
-        return $this->redirect(['action' => 'index']);
+        if ($identity['role_id'] == 'superuser' || $identity['role_id'] == 'comptable') {
+            return $this->redirect(['controller' => 'fichefrais', 'action' => 'displayetat', $idfiche]);
+        }
+        if ($identity['role_id'] == 'visiteur') {
+            return $this->redirect(['controller' => 'fichefrais', 'action' => 'display']);
+        }
     }
+
+    /**public function calculmontant($id = null)
+    {
+        $sommeHF = 0;
+        foreach ($fichefrai->lignefraishf as $lignefraishf) {
+            $sommeHF += $lignefraishf->montant;
+        }
+        $somme = 0;
+        foreach ($fichefrai->lignefraisforfait as $lignefraisforfait) {
+            $somme += $lignefraisforfait->fraisforfait->montant * $lignefraisforfait->quantite;
+        }
+        $sommeLignes = $somme + $sommeHF;
+        
+        $fichefrai->montantvalide = $sommeLignes;
+
+        this->calculmontant->$id;
+    }**/
+
+    public function calculmontant($id = null)
+    {
+        $this->loadModel('FicheFrais');
+        $fichefrai = $this->FicheFrais->get($id, [
+            'contain' => ['Lignefraisforfait', 'Lignefraishf', 'Lignefraisforfait.Fraisforfait'],
+        ]);
+        $sommeHF = 0;
+        foreach ($fichefrai->lignefraishf as $lignefraishf) {
+            $sommeHF += $lignefraishf->montant;
+        }
+
+        $somme = 0;
+        foreach ($fichefrai->lignefraisforfait as $lignefraisforfait) {
+            $somme += $lignefraisforfait->fraisforfait->montant * $lignefraisforfait->quantite;
+        }
+
+        $sommeLignes = $somme + $sommeHF;
+        $fichefrai->montantvalide = $sommeLignes;
+        
+        if ($this->FicheFrais->save($fichefrai)) {
+            $this->Flash->success(__('Mise à jour du montant.'));
+        }
+        else{
+            $this->Flash->error(__("Erreur lors de la mise à jour du montant."));
+        }
+
+        return $sommeLignes;
+    }
+
 }

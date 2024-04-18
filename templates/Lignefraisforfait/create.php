@@ -15,8 +15,8 @@
                 <?php
                     echo $this->Form->control('quantite');
                     echo $this->Form->control('fraisforfait_id', ['options' => $fraisforfait]);
-                    echo $this->Form->hidden('fichefrais._ids', ['name' => 'Fichefrais', 'value' => 'name']);
-                    debug($lignefraisforfait);
+                    echo $this->Form->input('fichefrais._ids', ['options' => $fichefrais, 'value' => $id, 'type' => 'hidden', 'name' => 'fichefrais[_ids][]']);
+
                 ?>
             </fieldset>
             <?= $this->Form->button(__('Valider')) ?>

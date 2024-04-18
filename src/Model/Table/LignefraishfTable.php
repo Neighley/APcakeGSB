@@ -48,6 +48,12 @@ class LignefraishfTable extends Table
             'targetForeignKey' => 'fichefrais_id',
             'joinTable' => 'fichefrais_lignefraishf',
         ]);
+
+        $this->belongsToMany('Fichefrais', [
+            'foreignKey' => 'lignefraishf_id',
+            'targetForeignKey' => 'fichefrais_id',
+            'joinTable' => 'fichefrais_lignefraishf',
+        ]);
     }
 
     /**

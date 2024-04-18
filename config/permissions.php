@@ -117,6 +117,7 @@ return [
                 'view',
                 'create',
                 'delete',
+                'modify',
             ],            
         ],
         //admin role allowed to all the things
@@ -128,6 +129,15 @@ return [
             'controller' => '*',
             'action' => '*',
         ],
+        [
+            'role' => 'visiteur',
+            'prefix' => '*',
+            'extension' => '*',
+            'plugin' => '*',
+            'controller' => '*',
+            'action' => '*',
+        ],
+
         //specific actions allowed for the all roles in Users plugin
         [
             'role' => '*',

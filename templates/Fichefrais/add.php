@@ -9,6 +9,12 @@
 $identity = $this->getRequest()->getAttribute('identity');
 ?>
 <div class="row">
+    <aside class="column">
+        <div class="side-nav">
+            <h4 class="heading"><?= __('Actions') ?></h4>
+                <?php echo $this->Html->link(__('◂ Retour'), ['action' => 'list'], ['class' => 'side-nav-item']); ?> 
+        </div>
+    </aside>
     <div class="column-responsive column-80">
         <div class="fichefrais form content">
             <?= $this->Form->create($fichefrai) ?>

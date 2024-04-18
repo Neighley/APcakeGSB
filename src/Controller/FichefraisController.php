@@ -105,21 +105,22 @@ class FichefraisController extends AppController
     public function edit($id = null)
     {
         $fichefrai = $this->Fichefrais->get($id, [
-            'contain' => ['Lignefraisforfait', 'Lignefraishf'],
+            'contain' => ['Lignefraisforfait', 'Lignefraishf', 'Etats'],
         ]);
         if ($this->request->is(['patch', 'post', 'put'])) {
             $fichefrai = $this->Fichefrais->patchEntity($fichefrai, $this->request->getData());
             if ($this->Fichefrais->save($fichefrai)) {
                 $this->Flash->success(__('La fiche de frais a bien été sauvegardée.'));
 
-                return $this->redirect(['action' => 'index']);
+                return $this->redirect(['action' => 'listall']);
             }
             $this->Flash->error(__("La fiche de frais n'a pas pu être sauvegardée. Veuillez réessayer."));
         }
         $users = $this->Fichefrais->Users->find('list', ['limit' => 200])->all();
         $lignefraisforfait = $this->Fichefrais->Lignefraisforfait->find('list', ['limit' => 200])->all();
         $lignefraishf = $this->Fichefrais->Lignefraishf->find('list', ['limit' => 200])->all();
-        $this->set(compact('fichefrai', 'users', 'lignefraisforfait', 'lignefraishf'));
+        $etat =  $this->Fichefrais->Etats->find('list', ['limit' => 200])->all();
+        $this->set(compact('fichefrai', 'users', 'lignefraisforfait', 'lignefraishf', 'etat'));
     }
 
     // CC de la fonction edit pour la page fichefrais/display
@@ -133,14 +134,26 @@ class FichefraisController extends AppController
             if ($this->Fichefrais->save($fichefrai)) {
                 $this->Flash->success(__('La fiche de frais a bien été sauvegardée.'));
 
-                return $this->redirect(['action' => 'index']);
+                return $this->redirect(['action' => 'list']);
             }
             $this->Flash->error(__("La fiche de frais n'a pas pu être sauvegardée. Veuillez réessayer."));
         }
+        $sommeHF = 0;
+        foreach ($fichefrai->lignefraishf as $lignefraishf) {
+            $sommeHF += $lignefraishf->montant;
+        }
+        $somme = 0;
+        foreach ($fichefrai->lignefraisforfait as $lignefraisforfait) {
+            $somme += $lignefraisforfait->fraisforfait->montant * $lignefraisforfait->quantite;
+        }
+        $sommeLignes = $somme + $sommeHF;
+        
+        $fichefrai->montantvalide = $sommeLignes;
+
         $users = $this->Fichefrais->Users->find('list', ['limit' => 200])->all();
         $lignefraisforfait = $this->Fichefrais->Lignefraisforfait->find('list', ['limit' => 200])->all();
         $lignefraishf = $this->Fichefrais->Lignefraishf->find('list', ['limit' => 200])->all();
-        $this->set(compact('fichefrai', 'users', 'lignefraisforfait', 'lignefraishf'));
+        $this->set(compact('fichefrai', 'users', 'lignefraisforfait', 'lignefraishf', 'sommeHF', 'somme', 'sommeLignes'));
     }
 
     public function modify($id = null)
@@ -153,7 +166,7 @@ class FichefraisController extends AppController
             if ($this->Fichefrais->save($fichefrai)) {
                 $this->Flash->success(__('La fiche de frais a bien été modifiée.'));
 
-                return $this->redirect(['action' => 'index']);
+                return $this->redirect(['action' => 'listall']);
             }
             $this->Flash->error(__("La fiche de frais n'a pas pu être modifiée. Veuillez réessayer."));
         }
@@ -173,7 +186,7 @@ class FichefraisController extends AppController
             if ($this->Fichefrais->save($fichefrai)) {
                 $this->Flash->success(__('La fiche de frais a bien été sauvegardée.'));
 
-                return $this->redirect(['action' => 'index']);
+                return $this->redirect(['action' => 'listall']);
             }
             $this->Flash->error(__("La fiche de frais n'a pas pu être sauvegardée. Veuillez réessayer."));
         }
@@ -192,6 +205,7 @@ class FichefraisController extends AppController
      */
     public function delete($id = null)
     {
+        $identity = $this->getRequest()->getAttribute('identity');
         $this->request->allowMethod(['post', 'delete']);
         $fichefrai = $this->Fichefrais->get($id);
         if ($this->Fichefrais->delete($fichefrai)) {
@@ -200,7 +214,12 @@ class FichefraisController extends AppController
             $this->Flash->error(__("La fiche de frais n'a pas pu être supprimée. Veuillez réessayer."));
         }
 
-        return $this->redirect(['action' => 'index']);
+        if ($identity['role_id'] == 'superuser') {
+            return $this->redirect(['action' => 'listall']);
+        }
+        if ($identity['role_id'] == 'visiteur') {
+            return $this->redirect(['action' => 'list']);
+        }
     }
 
     public function closeFiche($id = null)

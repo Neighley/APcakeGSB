@@ -30,6 +30,11 @@
                     <th><?= __('Quantite') ?></th>
                     <td><?= $this->Number->format($lignefraisforfait->quantite) ?></td>
                 </tr>
+
+                <tr>
+                    <th><?= __('Label') ?></th>
+                    <td><?= $this->Number->format($lignefraisforfait->fraisforfait->label) ?></td>
+                </tr>
             </table>
             <div class="related">
                 <h4><?= __('Related Fichefrais') ?></h4>
@@ -40,6 +45,7 @@
                             <th><?= __('Id') ?></th>
                             <th><?= __('Annee') ?></th>
                             <th><?= __('Mois') ?></th>
+                            <th><?= __('Label') ?></th>
                             <th><?= __('Montantvalide') ?></th>
                             <th><?= __('User Id') ?></th>
                             <th><?= __('Etat Id') ?></th>
@@ -50,6 +56,7 @@
                             <td><?= h($fichefrais->id) ?></td>
                             <td><?= h($fichefrais->annee) ?></td>
                             <td><?= h($fichefrais->mois) ?></td>
+                            <td><?= h($fichefrais->label) ?></td>
                             <td><?= h($fichefrais->montantvalide) ?></td>
                             <td><?= h($fichefrais->user_id) ?></td>
                             <td><?= h($fichefrais->etat_id) ?></td>
