@@ -55,6 +55,11 @@ class FichefraisTable extends Table
             'foreignKey' => 'etat_id',
             'joinType' => 'INNER',
         ]);
+        $this->belongsTo('Validateurs', [
+            'className'=>'Validateur',
+            'foreignKey' => 'validateur_id',
+            'joinType' => 'LEFT',
+        ]);
         $this->belongsToMany('Lignefraisforfait', [
             'foreignKey' => 'fichefrais_id',
             'targetForeignKey' => 'lignefraisforfait_id',
@@ -100,6 +105,11 @@ class FichefraisTable extends Table
             ->requirePresence('etat_id', 'create')
             ->notEmptyString('etat_id');
             //->add('etat_id', 'unique', ['rule' => 'validateUnique', 'provider' => 'table']);
+
+        $validator
+            ->integer('validateur_id')
+            ->requirePresence('validateur_id', 'create')
+            ->notEmptyString('validateur_id');
 
         return $validator;
     }

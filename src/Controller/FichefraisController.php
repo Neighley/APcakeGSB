@@ -43,7 +43,7 @@ class FichefraisController extends AppController
         $identity = $identity ?? [];
         $iduser = $identity["id"];
 
-        $fichefrais_req = $this->Fichefrais->find('all', ['contain' => ['Etats']]);
+        $fichefrais_req = $this->Fichefrais->find('all', ['contain' => ['Etats', 'Validateurs']]);
         $fichefrais = $this->paginate($fichefrais_req);
         $this->set(compact('fichefrais'));
     }
@@ -265,6 +265,27 @@ class FichefraisController extends AppController
             }
 
         return $this->redirect(['action' => 'listall']);
+    }
+
+    public function validateur($id = null)
+    {
+        $fichefrai = $this->Fichefrais->get($id, [
+            'contain' => ['Validateurs'],
+        ]);
+        $fichefrai->validateur_id = 3;
+
+        if ($this->request->is(['patch', 'post', 'put'])) {
+            $fichefrai = $this->Fichefrais->patchEntity($fichefrai, $this->request->getData());
+            if ($this->Fichefrais->save($fichefrai)) {
+                $this->Flash->success(__('Le nom du validateur a bien été enregistré.'));
+
+                return $this->redirect(['action' => 'listall']);
+            }
+            $this->Flash->error(__("Le nom du validateur n'a pas pu être enregistré. Veuillez réessayer."));
+        }
+        $users = $this->Fichefrais->Users->find('list', ['limit' => 200])->all();
+        $nom_validateur =  $this->Fichefrais->Validateurs->find('list', ['limit' => 200])->all();
+        $this->set(compact('fichefrai', 'users', 'nom_validateur'));
     }
 
 }

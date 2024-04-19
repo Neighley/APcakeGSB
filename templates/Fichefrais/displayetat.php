@@ -17,7 +17,9 @@ $identity = $this->getRequest()->getAttribute('identity');
                 echo $this->Html->link(__('◂ Retour'), ['action' => 'list'], ['class' => 'side-nav-item']); } ?> 
             
             <?php if($identity['role_id'] == "superuser" || $identity['role_id'] == "comptable"){
+                echo $this->Html->link(__('Validateurs'), ['action' => 'validateur', $fichefrai->id], ['class' => 'side-nav-item']);
                 echo $this->Html->link(__('◂ Retour'), ['action' => 'listall'], ['class' => 'side-nav-item']); } ?> 
+
 
             <?php if($identity['role_id'] == "superuser") {
                 echo $this->Form->postLink(
